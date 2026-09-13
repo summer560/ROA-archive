@@ -1,0 +1,63 @@
+---
+import pages from '../data/pages.json';
+const branches = pages.organizations.sections.filter(section => ['sdc', 'special-formation'].includes(section.id));
+---
+<section class="branch-systems" aria-label="ROA 지부 대응 체계">
+  <div class="branch-tabs" role="tablist" aria-label="ROA 지부 선택" hidden>
+    {branches.map((branch, index) => <button type="button" role="tab" id={`branch-tab-${branch.id}`} aria-controls={branch.id} aria-selected={index === 0 ? 'true' : 'false'} tabindex={index === 0 ? 0 : -1} data-branch-tab={branch.id}>
+      <span>{branch.title.split(' / ')[0]}</span><strong>{branch.title.split(' / ')[1]}</strong>
+    </button>)}
+  </div>
+  <div class="branch-panels">
+    {branches.map(branch => <section class="branch-panel" id={branch.id} role="tabpanel" aria-labelledby={`branch-tab-${branch.id}`} tabindex="0">
+      <h3 class="branch-fallback-title">{branch.title}</h3>
+      <div class="branch-overview"><p>{branch.paragraphs[0]}</p></div>
+      <div class="branch-copy">{branch.paragraphs.slice(1).map(paragraph => <p>{paragraph}</p>)}</div>
+    </section>)}
+  </div>
+</section>
+<script>
+  const root = document.querySelector<HTMLElement>('.branch-systems');
+  if (root) {
+    const tabs = Array.from(root.querySelectorAll<HTMLButtonElement>('[data-branch-tab]'));
+    const panels = Array.from(root.querySelectorAll<HTMLElement>('.branch-panel'));
+    const selectedFromHash = () => panels.findIndex(panel => `#${panel.id}` === location.hash);
+    function activate(index: number, updateAddress = false) {
+      tabs.forEach((tab, item) => {
+        const selected = item === index;
+        tab.setAttribute('aria-selected', String(selected));
+        tab.tabIndex = selected ? 0 : -1;
+        panels[item].hidden = !selected;
+      });
+      if (updateAddress) history.replaceState(null, '', `#${panels[index].id}`);
+      document.dispatchEvent(new Event('roa:section-change'));
+    }
+    root.classList.add('is-interactive');
+    root.querySelector<HTMLElement>('.branch-tabs')!.hidden = false;
+    activate(Math.max(0, selectedFromHash()));
+    tabs.forEach((tab, index) => {
+      tab.addEventListener('click', () => activate(index, true));
+      tab.addEventListener('keydown', event => {
+        let next = index;
+        if (event.key === 'ArrowRight') next = (index + 1) % tabs.length;
+        else if (event.key === 'ArrowLeft') next = (index - 1 + tabs.length) % tabs.length;
+        else if (event.key === 'Home') next = 0;
+        else if (event.key === 'End') next = tabs.length - 1;
+        else return;
+        event.preventDefault(); activate(next, true); tabs[next].focus();
+      });
+    });
+    // Reveal the destination before the browser follows a section-menu anchor.
+    document.addEventListener('click', event => {
+      if (!(event.target instanceof Element)) return;
+      const link = event.target.closest<HTMLAnchorElement>('a[href]');
+      if (!link || link.pathname !== location.pathname || link.origin !== location.origin) return;
+      const index = panels.findIndex(panel => link.hash === `#${panel.id}`);
+      if (index >= 0) activate(index);
+    });
+    window.addEventListener('hashchange', () => {
+      const index = selectedFromHash();
+      if (index >= 0) activate(index);
+    });
+  }
+</script>

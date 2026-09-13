@@ -2,32 +2,25 @@
 import { gallery } from '../data/gallery';
 ---
 <section class="gallery-section page-width" aria-label="일러스트 목록">
-  <div class="gallery-index"><span>VISUAL GALLERY</span><span>{String(gallery.length).padStart(2, '0')} IMAGES</span></div>
   <div class="gallery-grid">
     {gallery.map((item, index) => <article class="gallery-card" data-reveal>
       <a class="gallery-visual" href={item.original} target="_blank" rel="noopener" aria-label={`${item.title} 확대 보기`} data-gallery-open data-image={item.original} data-title={item.title} data-alt={item.alt} data-filename={item.filename} data-width={item.width} data-height={item.height}>
         <img src={item.preview} alt={item.alt} width={item.width} height={item.height} loading={index === 0 ? 'eager' : 'lazy'} decoding="async" />
-        <span class="gallery-view" aria-hidden="true">확대 보기 <b>＋</b></span>
+        <span class="gallery-view" aria-hidden="true">VIEW <b>＋</b></span>
       </a>
-      <div class="gallery-info">
-        <div class="gallery-caption"><span>{item.category}</span><span>{String(index + 1).padStart(2, '0')}</span></div>
-        <h2>{item.title}</h2>
-        <dl class="gallery-meta"><div><dt>IMAGE</dt><dd>{item.width} × {item.height}</dd></div><div><dt>FORMAT</dt><dd>{item.format}</dd></div></dl>
-        <a class="gallery-download" href={item.original} download={item.filename}>원본 다운로드 <span aria-hidden="true">↓</span></a>
-      </div>
+      <a class="gallery-download gallery-card-download" href={item.original} download={item.filename} aria-label={`${item.title} 원본 다운로드`}>DOWNLOAD <span aria-hidden="true">↓</span></a>
     </article>)}
   </div>
 </section>
-{gallery.length > 0 && <dialog class="gallery-dialog" aria-labelledby="gallery-dialog-title" aria-describedby="gallery-dialog-help">
+{gallery.length > 0 && <dialog class="gallery-dialog" aria-labelledby="gallery-dialog-title">
   <div class="gallery-dialog-shell">
-    <header class="gallery-dialog-header"><div><span class="eyebrow">ROA VISUAL GALLERY</span><h2 id="gallery-dialog-title">{gallery[0].title}</h2></div><button type="button" class="gallery-close" data-gallery-close aria-label="확대 이미지 닫기">닫기 <span aria-hidden="true">×</span></button></header>
+    <header class="gallery-dialog-header"><h2 id="gallery-dialog-title">GALLERY</h2><button type="button" class="gallery-close" data-gallery-close aria-label="확대 이미지 닫기">닫기 <span aria-hidden="true">×</span></button></header>
     <div class="gallery-stage"><img src={gallery[0].preview} alt={gallery[0].alt} width={gallery[0].width} height={gallery[0].height} data-gallery-full /></div>
     <footer class="gallery-dialog-footer">
       <div class="gallery-paging" hidden={gallery.length < 2}><button type="button" data-gallery-previous aria-label="이전 이미지">←</button><span data-gallery-count aria-live="polite">1 / {gallery.length}</span><button type="button" data-gallery-next aria-label="다음 이미지">→</button></div>
       <button type="button" class="gallery-fit" data-gallery-zoom aria-pressed="false">실제 크기</button>
-      <a class="gallery-download" href={gallery[0].original} download={gallery[0].filename} data-gallery-save>원본 다운로드 <span aria-hidden="true">↓</span></a>
+      <a class="gallery-download" href={gallery[0].original} download={gallery[0].filename} aria-label="원본 이미지 다운로드" data-gallery-save>DOWNLOAD <span aria-hidden="true">↓</span></a>
     </footer>
-    <p class="gallery-dialog-help" id="gallery-dialog-help">{gallery.length > 1 ? '← → 이미지 이동 · ' : ''}Esc 닫기</p>
   </div>
 </dialog>}
 <script>
@@ -35,7 +28,6 @@ import { gallery } from '../data/gallery';
   const items = Array.from(document.querySelectorAll<HTMLAnchorElement>('[data-gallery-open]'));
   if (dialog && items.length && typeof dialog.showModal === 'function') {
     const picture = dialog.querySelector<HTMLImageElement>('[data-gallery-full]')!;
-    const title = dialog.querySelector<HTMLElement>('#gallery-dialog-title')!;
     const download = dialog.querySelector<HTMLAnchorElement>('[data-gallery-save]')!;
     const counter = dialog.querySelector<HTMLElement>('[data-gallery-count]')!;
     const zoom = dialog.querySelector<HTMLButtonElement>('[data-gallery-zoom]')!;
@@ -55,7 +47,6 @@ import { gallery } from '../data/gallery';
       picture.alt = item.dataset.alt!;
       picture.width = Number(item.dataset.width);
       picture.height = Number(item.dataset.height);
-      title.textContent = item.dataset.title!;
       download.href = item.href;
       download.download = item.dataset.filename!;
       counter.textContent = `${current + 1} / ${items.length}`;

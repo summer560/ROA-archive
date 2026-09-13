@@ -17,6 +17,7 @@ ROA의 공개 설정을 게임 공식 홈페이지의 편집 방식으로 탐색
 | `src/pages/index.astro` | 일러스트 중심 홈 |
 | `src/pages/[category].astro` | WORLD / ABILITY / ALIEN / RANGER / ORGANIZATIONS |
 | `src/pages/archive.astro` | 일러스트 갤러리 |
+| `src/components/BranchSystems.astro` | SDC·특수편성국 탭과 기존 주소 연결 |
 | `src/components/Gallery.astro` | 갤러리 카드·확대 화면·다운로드 |
 | `src/data/gallery.ts` | 갤러리 이미지 목록·파일명·설명·크기 |
 | `src/scripts/page-interactions.ts` | 읽기 진행 표시·현재 목차 강조 |
@@ -107,7 +108,7 @@ Cloudflare의 **Workers & Pages → Create application → Pages → Import an e
 
 1. `public/images/gallery/`에 새 원본 이미지와 가벼운 미리보기 이미지를 넣습니다. 예: `roa-main-2026-10.jpg`, `roa-main-2026-10.webp`.
 2. `src/data/gallery.ts`에 기존 항목을 참고해 `id`, `title`, `category`, `preview`, `original`, `filename`, `alt`, `width`, `height`, `format`을 추가합니다.
-3. 목록 순서는 데이터 순서를 따릅니다. 새 이미지를 맨 위에 추가하면 먼저 표시됩니다.
+3. 갤러리에는 GALLERY 제목과 이미지·확대·다운로드 조작만 표시합니다. 제목·번호·크기·포맷 같은 상세 설명을 다시 노출하지 않습니다. 목록 순서는 데이터 순서를 따릅니다. 새 이미지를 맨 위에 추가하면 먼저 표시됩니다.
 4. 이미지가 두 개 이상이면 확대 화면의 이전·다음 버튼과 방향키 이동이 자동으로 활성화됩니다.
 
 홈 이미지와 갤러리 파일은 별도로 보관합니다. `hero-main.webp`를 교체해도 지난달 갤러리 이미지는 유지됩니다. 매달 Work에게 “메인 이미지를 바꾸고 이번 이미지도 갤러리에 추가해줘”라고 요청하면 됩니다. 다운로드 허용은 저작권·재사용 허가 문구를 임의로 추가한다는 의미가 아닙니다.
@@ -116,7 +117,7 @@ Cloudflare의 **Workers & Pages → Create application → Pages → Import an e
 
 Work에게 “ROA-archive의 ALIEN 페이지에서 외인혼혈 설명을 이 원문으로 바꿔줘”처럼 요청하면 됩니다.
 
-기존 내용은 `src/data/pages.json`에 있습니다. 각 섹션의 `id`는 링크 주소에 쓰이므로 내용만 수정할 때는 유지합니다. `title`은 제목, `eyebrow`는 작은 분류명, `paragraphs`는 문단 배열입니다. 설정은 JSON에 있고, 화면 배치는 컴포넌트와 CSS가 담당합니다.
+기존 내용은 `src/data/pages.json`에 있습니다. 각 섹션의 `id`는 링크 주소에 쓰이므로 내용만 수정할 때는 유지합니다. `title`은 제목, `eyebrow`는 작은 분류명, `paragraphs`는 문단 배열입니다. 설정은 JSON에 있고, 화면 배치는 컴포넌트와 CSS가 담당합니다. ORGANIZATIONS의 `sdc`, `special-formation`은 BranchSystems 컴포넌트의 탭으로 표시하며 기존 해시 주소를 유지합니다. 특수편성국의 신설·2026년 개설 설정은 폐기되었으므로 복원하지 않습니다.
 
 원고 우선순위는 사용자 명시 지시 → 해당 요청에서 지정한 최신 기준 원문 → 공개용 편집 원문입니다. 충돌이 생기면 추측으로 합치지 말고 해당 부분을 확인합니다. 비공개 캐릭터 비밀, OPEN, STORY ONLY 등을 공개 설정으로 옮기지 않습니다.
 

@@ -15,6 +15,7 @@ function updateReadingPosition() {
   const readingLine = Math.max(160, (sectionNav?.getBoundingClientRect().bottom ?? 0) + 36);
   let current = -1;
   sections.forEach((item, index) => {
+    if (item.section!.hidden || !item.section!.getClientRects().length) return;
     if (item.section!.getBoundingClientRect().top <= readingLine) current = index;
   });
   sections.forEach((item, index) => {
@@ -28,5 +29,6 @@ function scheduleReadingPosition() {
 window.addEventListener('scroll', scheduleReadingPosition, { passive: true });
 window.addEventListener('resize', scheduleReadingPosition);
 window.addEventListener('load', scheduleReadingPosition);
+document.addEventListener('roa:section-change', scheduleReadingPosition);
 document.fonts.ready.then(scheduleReadingPosition);
 updateReadingPosition();
