@@ -33,7 +33,7 @@ import '../styles/ranger-id.css';
               <label class="id-field" for="id-service">복무 유형<select id="id-service" name="service" aria-describedby="id-service-note">{rangerId.services.map(s => <option value={s.value} data-card-label={s.cardLabel}>{s.label}</option>)}</select></label>
             </div>
             <p class="id-help" id="id-service-note" hidden>1등급은 원칙적으로 정규 복무입니다.</p>
-            <div class="id-branch-preview"><span>기본 소속</span><output id="id-branch" for="id-country">국가명 ROA 지부</output></div>
+            <div class="id-branch-preview"><span>기본 소속</span><output id="id-branch" for="id-country">ROA 국가명 지부</output></div>
             <label class="id-field" for="id-affiliation">상세 소속 (선택)<select id="id-affiliation" name="affiliation">{rangerId.affiliations.map(a => <option value={a.value} data-card-label={a.cardLabel}>{a.label}</option>)}</select></label>
           </section>
           <section class="id-control-section">

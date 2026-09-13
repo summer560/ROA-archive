@@ -10,7 +10,7 @@ const FONT = 'Arial, "Apple SD Gothic Neo", "Malgun Gothic", sans-serif';
 
 // The national branch is always the primary affiliation; the optional unit is subordinate.
 export function branchName(country: string) {
-  return `${country.trim() || '국가명'} ROA 지부`;
+  return `ROA ${country.trim() || '국가명'} 지부`;
 }
 
 export function readableInk(hex: string): string {
