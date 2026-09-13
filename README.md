@@ -17,6 +17,11 @@ ROA의 공개 설정을 게임 공식 홈페이지의 편집 방식으로 탐색
 | `src/pages/index.astro` | 일러스트 중심 홈 |
 | `src/pages/[category].astro` | WORLD / ABILITY / ALIEN / RANGER / ORGANIZATIONS |
 | `src/pages/archive.astro` | 일러스트 갤러리 |
+| `src/pages/ranger-id.astro` | 레인저 등록증 제작 화면 |
+| `src/data/ranger-id.ts` | 공개 상세 소속·복무 표기·색상·능력분석관 링크 |
+| `src/scripts/ranger-id.ts` | 입력·사진 조절·저장 동작 |
+| `src/scripts/ranger-id-renderer.ts` | 미리보기와 PNG의 공통 카드 렌더러 |
+| `src/styles/ranger-id.css` | 등록증 편집 화면의 PC·모바일 스타일 |
 | `src/components/BranchSystems.astro` | SDC·특수편성국 탭과 기존 주소 연결 |
 | `src/components/Gallery.astro` | 갤러리 카드·확대 화면·다운로드 |
 | `src/data/gallery.ts` | 갤러리 이미지 목록·파일명·설명·크기 |
@@ -114,6 +119,18 @@ Cloudflare의 **Workers & Pages → Create application → Pages → Import an e
 4. 이미지가 두 개 이상이면 확대 화면의 이전·다음 버튼과 방향키 이동이 자동으로 활성화됩니다.
 
 홈 이미지와 갤러리 파일은 별도로 보관합니다. `hero-main.webp`를 교체해도 지난달 갤러리 이미지는 유지됩니다. 매달 Work에게 “메인 이미지를 바꾸고 이번 이미지도 갤러리에 추가해줘”라고 요청하면 됩니다. 다운로드 허용은 저작권·재사용 허가 문구를 임의로 추가한다는 의미가 아닙니다.
+
+## 레인저 등록증 콘텐츠
+
+`/ranger-id/`에서 제작하며 홈과 ARCHIVE의 RANGER ID 카드로 연결됩니다. 이름·이능력명·국가는 직접 입력하고 등급·복무·상세 소속은 선택합니다. 상세 소속은 없음, 한국 ROA 지부 특수편성국, 미국 ROA 지부 SDC이며 `src/data/ranger-id.ts`에서 관리합니다. ‘없음’은 카드에서 소속 줄을 숨기고 사진 영역을 확장합니다. 등급 목록은 기존 `systems.json`을 사용하며, 1등급 선택 시 정규 복무가 적용됩니다.
+
+같은 설정 파일에서 능력분석관의 Gemini Gem 링크와 기본 배경색 모음을 변경합니다. 능력이나 등급을 자동 생성·판정하는 기능은 없으며, Gem의 결과를 가져오는 자동 연동도 없습니다. 링크는 별도 탭으로 열립니다.
+
+사진은 선택 사항입니다. JPG·PNG·WebP를 최대 15MB, 4천만 화소까지 읽으며 브라우저 안에서 긴 변 2048px 이하로 줄여 사용합니다. 사진 이동·확대·흑백 전환을 지원하고 사진 없이도 기본 아이콘으로 만들 수 있습니다. 원본 파일, 입력값, 완성 이미지는 서버나 localStorage에 저장하지 않습니다. 새로고침하면 초기화됩니다. 로그인·DB·추가 배포 설정은 필요 없습니다.
+
+카드는 가로·세로 방향, 사진 좌우 배치(가로형), 배경색·글자색·포인트 색을 선택할 수 있습니다. 세로형은 사진 아래에 정보를 배치합니다. 자동 글자색은 배경과 대비가 더 높은 검정 또는 흰색을 선택합니다. 이름만 크게 표시하며 이능력·국가·등급·복무 값의 기본 글자 크기는 같습니다. 긴 문구는 카드 안에 맞게 축소합니다.
+
+Canvas 하나로 미리보기와 PNG를 그리므로 같은 구도·색상이 저장됩니다. PNG 크기는 가로 2400×1512, 세로 1512×2240입니다. 카드 구도는 `ranger-id-renderer.ts`, 편집 화면은 `ranger-id.css`에서 조정합니다. 사진 파일을 배포 저장소에 추가할 필요가 없고 개인 사진은 커밋하지 않습니다.
 
 ## 기존 세계관 내용 수정
 

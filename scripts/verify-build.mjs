@@ -6,7 +6,7 @@ async function walk(dir){const files=[];for(const item of await readdir(dir,{wit
 const files=await walk(root);
 const documents=new Map();
 for(const path of files.filter(f=>f.endsWith('.html'))){documents.set(path,await readFile(path,'utf8'));}
-for(const route of ['','world','ability','alien','ranger','organizations','archive','characters']) assert(documents.has(join(root,route,'index.html')),`Missing page: ${route}`);
+for(const route of ['','world','ability','alien','ranger','organizations','archive','characters','ranger-id']) assert(documents.has(join(root,route,'index.html')),`Missing page: ${route}`);
 for(const [path,html] of documents){
   assert.match(html,/<html[^>]*lang="ko"/,`Missing Korean lang: ${path}`);
   assert.match(html,/<title>[^<]+<\/title>/,`Missing title: ${path}`);

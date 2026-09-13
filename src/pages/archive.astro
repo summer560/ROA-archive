@@ -1,6 +1,7 @@
 ---
 import Base from '../layouts/Base.astro';
 import Gallery from '../components/Gallery.astro';
+import RangerIdLink from '../components/RangerIdLink.astro';
 ---
 <Base title="ARCHIVE — GALLERY" description="ROA 공식 이미지 갤러리입니다." category="archive">
   <section class="archive-intro page-width">
@@ -9,4 +10,5 @@ import Gallery from '../components/Gallery.astro';
     <div class="archive-heading"><h2>GALLERY</h2></div>
   </section>
   <Gallery />
+  <div class="page-width"><RangerIdLink /></div>
 </Base>

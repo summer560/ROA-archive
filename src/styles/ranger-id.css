@@ -1,0 +1,87 @@
+/* Scoped to the ID builder so its quiet controls do not change archive pages. */
+.id-page { padding-top:48px; padding-bottom:70px }
+.id-heading { display:flex; align-items:center; justify-content:space-between; gap:24px; margin-bottom:38px }
+.id-heading h1 { font:clamp(44px,5.5vw,76px)/1.1 var(--display); letter-spacing:-.01em }
+.id-heading p { font-size:17px; margin-top:9px; color:#d7d7cf }
+.id-analyst { border:1px solid #777; border-radius:999px; display:flex; gap:22px; align-items:center; padding:12px 22px; font-size:14px; white-space:nowrap }
+.id-analyst:hover { background:var(--yellow); border-color:var(--yellow); color:#111 }
+.id-workspace { display:grid; grid-template-columns:minmax(0,1.35fr) minmax(340px,.9fr); align-items:start; gap:34px }
+.id-preview { position:sticky; top:28px; min-width:0 }
+.id-preview-top { display:flex; align-items:center; justify-content:space-between; font:12px var(--mono); letter-spacing:.08em; margin-bottom:18px }
+.id-preview-top a { font:13px var(--body); letter-spacing:0 }
+.id-stage { background:#29292c; border-radius:24px; min-height:345px; padding:30px; display:flex; align-items:center; justify-content:center }
+.id-stage canvas { display:block; width:100%; height:auto; filter:drop-shadow(0 14px 18px #0003); border-radius:2%; touch-action:pan-y }
+.id-stage.has-photo canvas { touch-action:none; cursor:grab }
+.id-stage.has-photo canvas:active { cursor:grabbing }
+.id-stage.is-portrait canvas { max-width:330px }
+.id-stage.is-portrait { padding:24px }
+.id-photo-tip { min-height:24px; font-size:12px; margin-top:12px; color:#cdcdc7 }
+.id-actions { display:flex; gap:12px; margin-top:18px }
+.id-actions button { border-radius:10px; min-height:50px; border:1px solid #666; padding:12px 22px; font-size:14px }
+#id-save { flex:1; display:flex; justify-content:space-between; gap:12px; background:var(--yellow); border-color:var(--yellow); color:#111; font-weight:700 }
+#id-save:hover { background:#ffe459 }
+#id-reset { background:transparent; color:var(--paper) }
+.id-status { min-height:26px; margin-top:12px; font-size:13px; color:var(--yellow) }
+.id-privacy,.id-personal { font-size:12px; color:#c4c4bf; line-height:1.7 }
+.id-personal { margin-top:5px }
+#id-form { background:#f5f5f0; color:#111; border-radius:20px; padding:30px; min-width:0; scroll-margin-top:30px }
+#id-form fieldset { min-width:0; border:0; padding:0; margin:0 }
+.id-control-section+.id-control-section { margin-top:30px; padding-top:28px; border-top:1px solid #d1d1cb }
+.id-control-section h2 { font-size:19px; margin-bottom:20px; letter-spacing:-.035em }
+.id-field { display:flex; flex-direction:column; gap:7px; font-size:13px; color:#343430; margin-top:15px; min-width:0 }
+.id-field input,.id-field select { width:100%; min-width:0; border:1px solid #b9b9b2; border-radius:8px; background:#fff; color:#111; font:16px var(--body); padding:12px; height:47px }
+.id-field input::placeholder { color:#6c6c65 }
+.id-field input:focus-visible,.id-field select:focus-visible,#id-form input:focus-visible { outline:2px solid #416b93; outline-offset:2px }
+.id-two { display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr); gap:14px }
+.id-help { color:#4f4f48; font-size:12px; line-height:1.6; margin-top:9px }
+.id-file-label { display:flex; flex-direction:column; gap:10px; font-size:13px }
+.id-file-label input { font:13px var(--body); width:100%; color:#444; line-height:2 }
+.id-file-label input::file-selector-button { background:#111; color:#fff; border:0; border-radius:8px; padding:12px 16px; margin-right:10px; font:13px var(--body); cursor:pointer }
+.id-photo-status { font-size:12px; color:#763919; margin-top:8px; overflow-wrap:anywhere }
+.id-photo-controls:disabled { opacity:.45 }
+.id-range { display:grid; grid-template-columns:76px minmax(0,1fr); align-items:center; gap:12px; font-size:12px; margin-top:14px }
+.id-range input { width:100%; min-width:0; accent-color:#111; min-height:24px }
+.id-photo-bottom { display:flex; flex-wrap:wrap; gap:10px 14px; align-items:center; margin-top:17px }
+.id-photo-bottom button { background:none; color:#333; border:0; border-bottom:1px solid #999; padding:6px 0; font-size:12px; min-height:32px }
+.id-check { display:flex; align-items:center; gap:8px; font-size:12px; color:#333; min-height:32px }
+.id-check input { width:16px; height:16px; accent-color:#111; flex:none }
+#id-form .id-choice { margin-bottom:18px }
+.id-choice legend { font-size:13px; color:#343430; margin-bottom:8px }
+.id-choice>div { display:grid; grid-template-columns:1fr 1fr; gap:10px }
+.id-choice label { position:relative; cursor:pointer }
+.id-choice input { position:absolute; opacity:0; width:1px; height:1px }
+.id-choice span { display:block; border:1px solid #b9b9b2; border-radius:8px; padding:10px; text-align:center; font-size:13px; color:#111 }
+.id-choice input:checked+span { background:#111; border-color:#111; color:white }
+.id-choice input:focus-visible+span { outline:3px solid #416b93; outline-offset:2px }
+.id-swatches { display:flex; flex-wrap:wrap; gap:9px; margin:19px 0 }
+.id-swatch { display:grid; place-items:center; padding:4px; width:42px; height:42px; border:1px solid transparent; border-radius:50%; background:transparent }
+.id-swatch span { display:block; width:30px; height:30px; background:var(--swatch); border:1px solid #aaa6; border-radius:50% }
+.id-swatch[aria-pressed="true"] { border-color:#111 }
+.id-colors { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:12px; margin-bottom:12px }
+.id-colors label { font-size:12px; display:flex; flex-direction:column; gap:8px }
+.id-colors input { width:100%; height:38px; border:1px solid #b9b9b2; padding:3px; background:white; border-radius:6px; cursor:pointer }
+.id-colors input:disabled { opacity:.55; cursor:default }
+.id-sr-only { position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip-path:inset(50%); white-space:nowrap }
+.id-page button:disabled { cursor:default; opacity:.5 }
+.id-noscript { padding:20px; border:1px solid var(--yellow); margin-bottom:20px }
+@media(max-width:1000px) {
+  .id-workspace { grid-template-columns:1fr; gap:28px }
+  .id-preview { position:static }
+  .id-stage { min-height:0; padding:32px }
+  .id-stage canvas { max-width:700px }
+  .id-stage.is-portrait canvas { max-width:320px }
+}
+@media(max-width:600px) {
+  .id-page { padding-top:30px; padding-bottom:35px }
+  .id-heading { gap:15px; margin-bottom:26px; align-items:flex-start }
+  .id-heading h1 { font-size:42px }
+  .id-heading p { font-size:14px }
+  .id-analyst { font-size:12px; padding:10px 12px; gap:8px; margin-top:3px }
+  .id-stage,.id-stage.is-portrait { padding:14px; border-radius:14px }
+  .id-stage.is-portrait canvas { max-width:290px }
+  #id-form { padding:22px 18px; border-radius:14px }
+  .id-two { gap:10px }
+  .id-field input,.id-field select { padding:10px 8px }
+  .id-actions button { padding-inline:16px }
+}
+@media(prefers-reduced-motion:reduce) { .id-page * { scroll-behavior:auto } }

@@ -1,0 +1,65 @@
+---
+import Base from '../layouts/Base.astro';
+import { rangerId } from '../data/ranger-id';
+import systems from '../data/systems.json';
+import '../styles/ranger-id.css';
+---
+<Base title="RANGER ID — 등록증 만들기" description="사진과 이름, 이능력, 소속을 선택해 나만의 ROA 레인저 등록증을 만들고 이미지로 저장하세요." category="archive">
+  <div class="id-page page-width" data-id-builder>
+    <header class="id-heading"><div><h1>RANGER ID</h1><p>등록증 만들기</p></div><a class="id-analyst" href={rangerId.analystUrl} target="_blank" rel="noopener noreferrer">능력분석관 <span aria-hidden="true">↗</span></a></header>
+    <noscript><p class="id-noscript">등록증을 만들려면 브라우저에서 JavaScript를 허용해주세요.</p></noscript>
+    <div class="id-workspace">
+      <section class="id-preview" aria-label="등록증 미리보기">
+        <div class="id-preview-top"><span>PREVIEW</span><a href="#id-form">정보 편집 <span aria-hidden="true">↓</span></a></div>
+        <div class="id-stage"><canvas id="id-canvas" width="2400" height="1512" role="img" aria-label="등록증 미리보기를 준비하고 있습니다.">입력한 정보로 만드는 레인저 등록증</canvas></div>
+        <p class="id-photo-tip" id="id-photo-tip">사진은 선택 사항입니다.</p>
+        <div class="id-actions"><button id="id-save" type="submit" form="id-form" disabled>이미지 저장 <span aria-hidden="true">↓</span></button><button id="id-reset" type="button" disabled>초기화</button></div>
+        <p class="id-status" id="id-status" role="status" aria-live="polite"></p>
+        <p class="id-privacy">사진과 입력 정보는 서버에 저장되지 않습니다. 새로고침하면 초기화됩니다.</p>
+        <p class="id-personal">개인 창작용 등록증</p>
+      </section>
+      <form id="id-form" autocomplete="off">
+        <fieldset id="id-controls" disabled>
+          <legend class="id-sr-only">등록증 편집</legend>
+          <section class="id-control-section">
+            <h2>기본 정보</h2>
+            <label class="id-field" for="id-name">이름<input id="id-name" name="name" type="text" placeholder="이름 입력" maxlength="24" required /></label>
+            <div class="id-two">
+              <label class="id-field" for="id-ability">이능력명<input id="id-ability" name="ability" type="text" placeholder="이능력명 입력" maxlength="40" required /></label>
+              <label class="id-field" for="id-country">소속 국가<input id="id-country" name="country" type="text" placeholder="국가 직접 입력" maxlength="36" required /></label>
+            </div>
+            <div class="id-two">
+              <label class="id-field" for="id-grade">레인저 등급<select id="id-grade" name="grade">{systems.grades.map(g => <option value={String(g.grade)} selected={g.grade === 3}>Grade {g.grade}</option>)}</select></label>
+              <label class="id-field" for="id-service">복무 유형<select id="id-service" name="service" aria-describedby="id-service-note">{rangerId.services.map(s => <option value={s.value} data-card-label={s.cardLabel}>{s.label}</option>)}</select></label>
+            </div>
+            <p class="id-help" id="id-service-note" hidden>1등급은 원칙적으로 정규 복무입니다.</p>
+            <label class="id-field" for="id-affiliation">상세 소속<select id="id-affiliation" name="affiliation">{rangerId.affiliations.map(a => <option value={a.value}>{a.label}</option>)}</select></label>
+          </section>
+          <section class="id-control-section">
+            <h2>프로필 사진</h2>
+            <label class="id-file-label" for="id-photo">사진 선택<input id="id-photo" type="file" accept="image/jpeg,image/png,image/webp" aria-describedby="id-photo-help" /></label>
+            <p class="id-help" id="id-photo-help">JPG · PNG · WebP / 최대 15MB</p>
+            <p class="id-photo-status" id="id-photo-status" role="status" aria-live="polite"></p>
+            <fieldset class="id-photo-controls" id="id-photo-controls" disabled>
+              <legend class="id-sr-only">사진 조절</legend>
+              <label class="id-range" for="id-zoom"><span>확대</span><input id="id-zoom" type="range" min="1" max="3" step="0.01" value="1" /></label>
+              <label class="id-range" for="id-pan-x"><span>가로 위치</span><input id="id-pan-x" type="range" min="0" max="100" value="50" /></label>
+              <label class="id-range" for="id-pan-y"><span>세로 위치</span><input id="id-pan-y" type="range" min="0" max="100" value="50" /></label>
+              <div class="id-photo-bottom"><label class="id-check"><input id="id-monochrome" type="checkbox" />흑백 사진</label><button id="id-photo-reset" type="button">위치 초기화</button><button id="id-photo-remove" type="button">사진 삭제</button></div>
+            </fieldset>
+          </section>
+          <section class="id-control-section">
+            <h2>디자인</h2>
+            <fieldset class="id-choice"><legend>카드 방향</legend><div><label><input type="radio" name="orientation" value="landscape" checked /><span>가로</span></label><label><input type="radio" name="orientation" value="portrait" /><span>세로</span></label></div></fieldset>
+            <fieldset class="id-choice" id="id-layout-choice"><legend>사진 위치</legend><div><label><input type="radio" name="layout" value="left" checked /><span>왼쪽 / 01</span></label><label><input type="radio" name="layout" value="right" /><span>오른쪽 / 02</span></label></div></fieldset>
+            <p id="id-portrait-note" class="id-help" hidden>세로형은 사진 아래에 정보를 배치합니다.</p>
+            <div class="id-swatches" aria-label="배경색 프리셋">{rangerId.palettes.map((p, i) => <button type="button" class="id-swatch" style={`--swatch:${p.background}`} data-background={p.background} data-accent={p.accent} aria-label={p.label} aria-pressed={String(i === 0)}><span></span></button>)}</div>
+            <div class="id-colors"><label for="id-background">배경색<input id="id-background" type="color" value="#F5F5F0" /></label><label for="id-accent">포인트 색<input id="id-accent" type="color" value="#FFD400" /></label><label for="id-foreground">글자색<input id="id-foreground" type="color" value="#111111" disabled /></label></div>
+            <label class="id-check"><input id="id-auto-ink" type="checkbox" checked />배경에 맞춰 글자색 자동 선택</label>
+          </section>
+        </fieldset>
+      </form>
+    </div>
+  </div>
+  <script>import '../scripts/ranger-id';</script>
+</Base>
