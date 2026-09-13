@@ -27,7 +27,7 @@ const canonical = Astro.site ? new URL(Astro.url.pathname, Astro.site).href : un
     <div class="reading-progress" aria-hidden="true"><span data-reading-progress></span></div>
     <a class="skip-link" href="#main">본문으로 건너뛰기</a>
     <header class="site-header">
-      <a class="brand" href="/" aria-label="ROA 홈"><Logo /><span class="brand-description">WORLD<br />ARCHIVE</span></a>
+      <a class="brand" href="/" aria-label="ROA 홈"><Logo /></a>
       <nav class="desktop-nav" aria-label="주 메뉴">
         {navigation.map(item => <a href={`/${item.slug}/`} aria-current={category === item.slug ? 'page' : undefined}>{item.en}</a>)}
       </nav>

@@ -154,14 +154,6 @@ a:focus-visible,button:focus-visible,summary:focus-visible,[tabindex]:focus-visi
 .logo-image {
   object-fit:contain
 }
-.brand>.brand-description {
-  font-family:var(--mono);
-  font-size:12px;
-  line-height:1.25;
-  letter-spacing:.045em;
-  border-left:1px solid #555;
-  padding-left:17px
-}
 .desktop-nav {
   display:flex;
   align-items:center;
@@ -1671,10 +1663,6 @@ a:focus-visible,button:focus-visible,summary:focus-visible,[tabindex]:focus-visi
   }
   .brand {
     gap:13px
-  }
-  .brand>.brand-description {
-    font-size:12px;
-    padding-left:13px
   }
   .home-hero {
     height:790px;
