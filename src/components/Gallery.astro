@@ -18,7 +18,6 @@ import { gallery } from '../data/gallery';
     <div class="gallery-stage"><img src={gallery[0].preview} alt={gallery[0].alt} width={gallery[0].width} height={gallery[0].height} data-gallery-full /></div>
     <footer class="gallery-dialog-footer">
       <div class="gallery-paging" hidden={gallery.length < 2}><button type="button" data-gallery-previous aria-label="이전 이미지">←</button><span data-gallery-count aria-live="polite">1 / {gallery.length}</span><button type="button" data-gallery-next aria-label="다음 이미지">→</button></div>
-      <button type="button" class="gallery-fit" data-gallery-zoom aria-pressed="false">실제 크기</button>
       <a class="gallery-download" href={gallery[0].original} download={gallery[0].filename} aria-label="원본 이미지 다운로드" data-gallery-save>DOWNLOAD <span aria-hidden="true">↓</span></a>
     </footer>
   </div>
@@ -30,19 +29,10 @@ import { gallery } from '../data/gallery';
     const picture = dialog.querySelector<HTMLImageElement>('[data-gallery-full]')!;
     const download = dialog.querySelector<HTMLAnchorElement>('[data-gallery-save]')!;
     const counter = dialog.querySelector<HTMLElement>('[data-gallery-count]')!;
-    const zoom = dialog.querySelector<HTMLButtonElement>('[data-gallery-zoom]')!;
-    const stage = dialog.querySelector<HTMLElement>('.gallery-stage')!;
     let current = 0;
-    function resetZoom() {
-      stage.classList.remove('is-zoomed');
-      stage.scrollTop = stage.scrollLeft = 0;
-      zoom.setAttribute('aria-pressed', 'false');
-      zoom.textContent = '실제 크기';
-    }
     function show(index: number) {
       current = (index + items.length) % items.length;
       const item = items[current];
-      resetZoom();
       picture.src = item.dataset.image!;
       picture.alt = item.dataset.alt!;
       picture.width = Number(item.dataset.width);
@@ -57,21 +47,15 @@ import { gallery } from '../data/gallery';
       document.documentElement.classList.add('gallery-modal-open');
     }));
     dialog.querySelector('[data-gallery-close]')!.addEventListener('click', () => dialog.close());
-    dialog.addEventListener('close', () => { document.documentElement.classList.remove('gallery-modal-open'); resetZoom(); });
+    dialog.addEventListener('close', () => { document.documentElement.classList.remove('gallery-modal-open'); });
     dialog.addEventListener('click', event => { if (event.target === dialog) dialog.close(); });
     dialog.querySelector('[data-gallery-previous]')!.addEventListener('click', () => show(current - 1));
     dialog.querySelector('[data-gallery-next]')!.addEventListener('click', () => show(current + 1));
     dialog.addEventListener('keydown', event => {
-      if (items.length < 2 || stage.classList.contains('is-zoomed')) return;
+      if (items.length < 2) return;
       if (event.key === 'ArrowLeft' || event.key === 'ArrowRight') {
         event.preventDefault(); show(current + (event.key === 'ArrowRight' ? 1 : -1));
       }
-    });
-    zoom.addEventListener('click', () => {
-      const enlarged = stage.classList.toggle('is-zoomed');
-      zoom.setAttribute('aria-pressed', String(enlarged));
-      zoom.textContent = enlarged ? '화면에 맞추기' : '실제 크기';
-      if (!enlarged) stage.scrollTop = stage.scrollLeft = 0;
     });
   }
 </script>

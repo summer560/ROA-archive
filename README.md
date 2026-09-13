@@ -174,7 +174,7 @@ Work에게 “ROA-archive의 ALIEN 페이지에서 외인혼혈 설명을 이 �
 
 영문 제목에는 로컬 호스팅하는 Anton을 사용합니다. 본문은 운영체제 한글 글꼴을 사용합니다. 글꼴 외부 API 호출은 없습니다. Anton은 SIL Open Font License이며 패키지의 라이선스를 따릅니다.
 
-스크롤 등장은 IntersectionObserver, 메뉴는 HTML details, 등급 선택은 소량의 JavaScript를 사용합니다. 페이지 상단의 읽기 진행 표시와 현재 목차 강조는 스크롤을 가로채지 않고 한 프레임씩 갱신합니다. 갤러리는 native dialog로 키보드 초점과 Esc 닫기를 지원하며, 실제 크기 보기와 여러 이미지 간 이동을 제공합니다. 지원 브라우저에서는 CSS View Transition으로 페이지를 전환합니다. 다른 브라우저에서는 일반 링크로 이동합니다. `prefers-reduced-motion`에서는 이동·등장·띠 애니메이션을 끕니다. JavaScript가 없어도 본문, 메뉴, 링크를 읽을 수 있습니다.
+스크롤 등장은 IntersectionObserver, 메뉴는 HTML details, 등급 선택은 소량의 JavaScript를 사용합니다. 페이지 상단의 읽기 진행 표시와 현재 목차 강조는 스크롤을 가로채지 않고 한 프레임씩 갱신합니다. 갤러리는 native dialog로 키보드 초점과 Esc 닫기를 지원하며, 화면에 맞춘 이미지 보기와 여러 이미지 간 이동을 제공합니다. 지원 브라우저에서는 CSS View Transition으로 페이지를 전환합니다. 다른 브라우저에서는 일반 링크로 이동합니다. `prefers-reduced-motion`에서는 이동·등장·띠 애니메이션을 끕니다. JavaScript가 없어도 본문, 메뉴, 링크를 읽을 수 있습니다.
 
 ## 이후 Work에 수정 요청할 때
 
