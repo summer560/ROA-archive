@@ -1,0 +1,35 @@
+---
+import Base from '../layouts/Base.astro';
+import Logo from '../components/Logo.astro';
+import Timeline from '../components/Timeline.astro';
+import Organizations from '../components/Organizations.astro';
+import { site, navigation } from '../data/site';
+import pages from '../data/pages.json';
+import timeline from '../data/timeline.json';
+const firstPortalYear = timeline.find(event => event.title === '차원 포탈 등장')?.year;
+---
+<Base>
+  <section class="home-hero" style={`--hero-position:${site.hero.desktopPosition};--hero-mobile-position:${site.hero.mobilePosition}`}>
+    <picture class="hero-picture"><source media="(max-width: 700px)" srcset={site.hero.mobile} /><img src={site.hero.desktop} alt={site.hero.alt} width={site.hero.width} height={site.hero.height} fetchpriority="high" /></picture>
+    <div class="hero-shade" aria-hidden="true"></div>
+    <span class="hero-side-code" aria-hidden="true">RANGER ORGANIZATION ALLIANCE / WORLD ARCHIVE</span>
+    <div class="hero-content">
+      <span class="hero-eyebrow"><i aria-hidden="true"></i> ROA OFFICIAL WORLD ARCHIVE</span>
+      <h1><Logo /></h1>
+      <p class="hero-copy">{site.copy}</p>
+      <a class="solid-button" href="/world/">세계관 탐색하기 <span aria-hidden="true">↗</span></a>
+    </div>
+    <div class="hero-sticker" aria-hidden="true">BEYOND<br />THE ORDINARY.<span>ROA WORLD ARCHIVE</span></div>
+    <div class="hero-bottom"><span>일상과 비일상의 경계</span><a href="#explore">SCROLL TO EXPLORE <span aria-hidden="true">↓</span></a><span aria-hidden="true">01 / 07</span></div>
+  </section>
+  <div class="ticker" aria-hidden="true"><div>WORLD ARCHIVE <i>✳</i> RANGER ORGANIZATION ALLIANCE <i>✳</i> WORLD ARCHIVE <i>✳</i> RANGER ORGANIZATION ALLIANCE <i>✳</i></div></div>
+  <section id="explore" class="explore-section page-width">
+    <div class="section-heading" data-reveal><div><span class="eyebrow">EXPLORE THE WORLD</span><h2>평범한 오늘의<br />낯선 이면.</h2></div><p class="section-deck">{pages.world.lead}</p></div>
+    <div class="explore-grid">
+      {navigation.slice(0,4).map((n,i)=><a class:list={['explore-card',`explore-${n.slug}`]} href={`/${n.slug}/`} data-reveal><div class="card-top"><span>{n.number} / WORLD ARCHIVE</span><span class="card-arrow" aria-hidden="true">↗</span></div><div class="card-art" aria-hidden="true">{i===0?<span class="art-world">{firstPortalYear}<span>THE FIRST PORTAL</span></span>:i===1?<span class="art-ability">2<small>%</small></span>:i===2?<span class="art-alien">NOT<br />ONE.</span>:<span class="art-ranger">01<span>02 / 03 / 04 / 05</span></span>}</div><div class="card-bottom"><h3>{n.en}</h3><span>{n.ko}</span></div></a>)}
+    </div>
+  </section>
+  <div class="history-home"><div class="page-width"><Timeline compact /></div></div>
+  <section class="home-organizations page-width"><div class="section-heading" data-reveal><div><span class="eyebrow">THREE SIDES. ONE WORLD.</span><h2>같은 세계, 다른 신념.</h2></div><a class="text-link" href="/organizations/">조직 살펴보기 <span aria-hidden="true">↗</span></a></div><Organizations /></section>
+  <section class="coming-links page-width"><a href="/archive/"><span class="eyebrow">06 / COMING SOON</span><strong>ARCHIVE</strong><span>기록 보관소 <b aria-hidden="true">↗</b></span></a><a href="/characters/"><span class="eyebrow">07 / COMING SOON</span><strong>CHARACTERS</strong><span>캐릭터 <b aria-hidden="true">↗</b></span></a></section>
+</Base>

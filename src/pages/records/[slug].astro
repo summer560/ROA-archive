@@ -1,0 +1,8 @@
+---
+import Base from '../../layouts/Base.astro';
+export function getStaticPaths(){return Object.values(import.meta.glob('../../content/records/*.md',{eager:true})).filter((r:any)=>!r.frontmatter.draft).map((record:any)=>({params:{slug:record.frontmatter.slug},props:{record}}));}
+const {record}=Astro.props;
+const {title,description,category,image,imageAlt}=record.frontmatter;
+const Content=record.Content;
+---
+<Base title={title} description={description} category={category}><article class="record-detail page-width"><a class="text-link" href={`/${category}/`}>← {category.toUpperCase()}</a><h1>{title}</h1>{image&&<img src={image} alt={imageAlt||title} width="1200" height="700" />}<div class="prose"><Content /></div></article></Base>

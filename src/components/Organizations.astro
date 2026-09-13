@@ -1,0 +1,11 @@
+---
+import { organizationCards as cards } from '../data/organizations';
+const { local = false } = Astro.props;
+---
+<div class="org-posters">
+  {cards.map(c => <a href={`${local ? '' : '/organizations/'}#${c.id}`} class:list={['org-poster', `poster-${c.id}`]} data-reveal>
+    <div class="poster-top"><span>{c.caption}</span><span>{c.n}</span></div>
+    <div class="poster-name">{c.name}</div><blockquote>{c.quote}</blockquote>
+    <div class="poster-foot"><p>{c.note}</p><span class="poster-arrow" aria-label="자세히 보기">↗</span></div>
+  </a>)}
+</div>

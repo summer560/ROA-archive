@@ -1,0 +1,5 @@
+---
+import Base from '../../layouts/Base.astro';
+const characters = Object.values(import.meta.glob('../../content/characters/*.md',{eager:true})).filter((c:any)=>!c.frontmatter.draft).sort((a:any,b:any)=>(a.frontmatter.order||0)-(b.frontmatter.order||0)) as any[];
+---
+<Base title="CHARACTERS — 캐릭터" category="characters"><section class="coming-page page-width"><span class="eyebrow">07 / ROA WORLD ARCHIVE</span><h1 class="characters-title">CHARACTERS{characters.length===0 && <span class="coming-label">COMING SOON</span>}</h1><div class="coming-divider" aria-hidden="true"></div>{characters.length===0?<><p>캐릭터 프로필을 준비하고 있습니다.</p><a class="solid-button" href="/world/">세계관 둘러보기 <span aria-hidden="true">↗</span></a></>:<div class="character-grid">{characters.map(c=><a href={`/characters/${c.frontmatter.slug}/`}><img src={c.frontmatter.image} alt={c.frontmatter.imageAlt||c.frontmatter.name} width="600" height="800" loading="lazy" /><span>{c.frontmatter.organization}</span><h2>{c.frontmatter.name}</h2></a>)}</div>}</section></Base>

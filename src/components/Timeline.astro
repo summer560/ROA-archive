@@ -1,0 +1,13 @@
+---
+import timeline from '../data/timeline.json';
+const { compact = false } = Astro.props;
+const events = compact ? timeline.filter(e=>e.major) : timeline;
+const firstYear = timeline[0].year.split(/[—~]/)[0];
+const lastYear = timeline.at(-1).year;
+---
+<section id="timeline" class:list={['timeline-section', compact && 'timeline-compact']}>
+  <div class="section-heading" data-reveal><div><span class="eyebrow">THE WORLD TIMELINE</span><h2>역사가 된 전환점</h2></div>{compact ? <a class="text-link" href="/world/#timeline">전체 연표 보기 <span aria-hidden="true">↗</span></a> : <span class="tiny-label">{firstYear} — {lastYear}</span>}</div>
+  <ol class="timeline-list">
+    {events.map(e => <li class:list={['timeline-event', e.major && 'major']} data-reveal><div class="timeline-year"><span>{e.year}</span>{e.major && <span class="timeline-mark" aria-hidden="true">+</span>}</div><div class="timeline-copy"><h3>{e.title}</h3><p>{e.description}</p></div></li>)}
+  </ol>
+</section>

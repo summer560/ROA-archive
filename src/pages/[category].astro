@@ -1,0 +1,39 @@
+---
+import Base from '../layouts/Base.astro';
+import Section from '../components/Section.astro';
+import Timeline from '../components/Timeline.astro';
+import Organizations from '../components/Organizations.astro';
+import GradeSystem from '../components/GradeSystem.astro';
+import IncidentSystem from '../components/IncidentSystem.astro';
+import pages from '../data/pages.json';
+import systems from '../data/systems.json';
+import { navigation } from '../data/site';
+export function getStaticPaths() { return Object.entries(pages).map(([category,page])=>({params:{category},props:{page}})); }
+const { page } = Astro.props;
+const category = Astro.params.category!;
+const current = navigation.find(n=>n.slug===category)!;
+const sections = page.sections;
+const links = category==='ranger' ? [sections[0],sections[1],{id:'service-types',title:'복무 유형'},{id:'grade',title:'Ranger Grade'},{id:'incident',title:'Incident Type'},sections[2],sections[3]] : [...sections, ...(category==='world' ? [{id:'timeline',title:'세계 연표'}]:[])];
+const moreRecords = Object.values(import.meta.glob('../content/records/*.md',{eager:true})).filter((entry:any)=>entry.frontmatter.category===category && !entry.frontmatter.draft) as any[];
+---
+<Base title={`${page.en} — ${current.ko}`} description={page.lead || page.sections[0]?.paragraphs[0]} category={category}>
+  <section class:list={['category-hero',`category-hero-${category}`]}>
+    <div class="page-width">
+      <div class="category-meta"><a href="/">ROA / WORLD ARCHIVE</a><span>{current.number} / 07</span></div>
+      {category==='ability' ? <div class="ability-display"><div><span class="eyebrow">APPROXIMATELY</span><h1>2<span>%</span></h1><p>OF THE WORLD POPULATION</p></div><div class="population-grid" role="img" aria-label="세계 인구의 약 2%가 이능력자로 추정됩니다.">{Array.from({length:100},(_,i)=><span class:list={[i<2 && 'highlight']}></span>)}</div></div> : category==='alien' ? <><h1 class="alien-display">THEY ARE<br /><span>NOT ONE</span><br />SPECIES.</h1><span class="alien-stamp" aria-hidden="true">ALIEN<br />LIFE</span></> : <h1 class:list={['category-title',category==='organizations' && 'long-title']}>{page.en}</h1>}
+      {(page.title || page.lead) && <div class="category-intro">{page.title && <h2>{page.title}</h2>}{category!=='organizations' && page.lead && <p>{page.lead}</p>}</div>}
+    </div>
+  </section>
+  <nav class="section-nav" aria-label={`${current.ko} 페이지 목차`}><div class="page-width">{links.map(s=><a href={`#${s.id}`}>{s.title}</a>)}</div></nav>
+  <div class="page-width category-content">
+    {category==='organizations' && <Organizations local />}
+    {category==='ranger' ? <>
+      <Section section={sections[0]} /><Section section={sections[1]} />
+      <section class="service-types" id="service-types" data-reveal><div class="section-heading"><div><span class="eyebrow">03 / SERVICE TYPES</span><h2>두 가지 복무 방식</h2></div></div><div class="service-grid">{systems.serviceTypes.map((t,i)=><article><span class="eyebrow">{i===0?'REGULAR':'CONCURRENT'}</span><h3>{t.title}</h3>{t.paragraphs.map(p=><p>{p}</p>)}</article>)}</div></section>
+      <GradeSystem /><IncidentSystem /><Section section={sections[2]} /><Section section={sections[3]} />
+    </> : sections.map(s=><Section section={s} />)}
+    {category==='world' && <Timeline />}
+    {moreRecords.length>0 && <section class="record-list"><h2>관련 기록</h2>{moreRecords.map((r:any)=><a href={`/records/${r.frontmatter.slug}/`}>{r.frontmatter.title} <span aria-hidden="true">↗</span></a>)}</section>}
+  </div>
+  <div class="next-chapter page-width"><span class="eyebrow">CONTINUE EXPLORING</span><a href={`/${navigation[(navigation.findIndex(n=>n.slug===category)+1)%navigation.length].slug}/`}>{navigation[(navigation.findIndex(n=>n.slug===category)+1)%navigation.length].en}<span aria-hidden="true">↗</span></a></div>
+</Base>

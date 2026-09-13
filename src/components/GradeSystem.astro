@@ -1,0 +1,31 @@
+---
+import systems from '../data/systems.json';
+---
+<section id="grade" class="grade-section" data-reveal>
+  <div class="section-heading"><div><span class="eyebrow">04 / RANGER GRADE</span><h2>힘을 평가하는 다른 기준</h2></div><span class="tiny-label">GRADE 1 — 5</span></div>
+  <div class="system-intro">{systems.gradeIntro.map(p=><p>{p}</p>)}</div>
+  <div class="grade-cards" role="tablist" aria-label="레인저 등급">
+    {systems.grades.map((g,i) => <button type="button" id={`grade-tab-${g.grade}`} role="tab" aria-selected={i===0 ? 'true':'false'} aria-controls={`grade-panel-${g.grade}`} tabindex={i===0?0:-1} class:list={['grade-card',i===0 && 'active']} data-grade={g.grade}><span>GRADE</span><strong>{g.grade.toString().padStart(2,'0')}</strong><span class="grade-select">상세 보기 <b aria-hidden="true">↗</b></span></button>)}
+  </div>
+  <div class="grade-panels">{systems.grades.map((g,i)=><div class="grade-panel" role="tabpanel" tabindex="0" id={`grade-panel-${g.grade}`} aria-labelledby={`grade-tab-${g.grade}`} hidden={i!==0}><span class="eyebrow">GRADE {g.grade}</span><p>{g.description}</p></div>)}</div>
+  <noscript><ul>{systems.grades.map(g=><li>GRADE {g.grade}: {g.description}</li>)}</ul></noscript>
+  <details class="read-more"><summary>등급 평가 요소와 원칙 <span aria-hidden="true">+</span></summary><div class="factor-grid">{systems.factors.map(f=><div><h3>{f.title}</h3><p>{f.description}</p></div>)}</div><div class="principles">{systems.gradePrinciples.map(p=><p>{p}</p>)}</div></details>
+</section>
+<script>
+  const tabs = Array.from(document.querySelectorAll<HTMLButtonElement>('[data-grade]'));
+  function activate(tab: HTMLButtonElement) {
+    tabs.forEach(button => { const active = button===tab; button.setAttribute('aria-selected',String(active)); button.tabIndex = active ? 0 : -1; button.classList.toggle('active',active); const panel=document.getElementById(`grade-panel-${button.dataset.grade}`); if (panel) panel.hidden=!active; });
+  }
+  tabs.forEach((tab,i)=>{
+    tab.addEventListener('click',()=>activate(tab));
+    tab.addEventListener('keydown',e=>{
+      let next=i;
+      if(e.key==='ArrowRight') next=(i+1)%tabs.length;
+      else if(e.key==='ArrowLeft') next=(i-1+tabs.length)%tabs.length;
+      else if(e.key==='Home') next=0;
+      else if(e.key==='End') next=tabs.length-1;
+      else return;
+      e.preventDefault(); activate(tabs[next]); tabs[next].focus();
+    });
+  });
+</script>

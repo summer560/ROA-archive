@@ -1,0 +1,8 @@
+---
+interface Props { section: { id: string; title: string; eyebrow: string; paragraphs: string[]; tone: string }; }
+const { section } = Astro.props;
+---
+<section id={section.id} class:list={['editorial-section',section.tone && `tone-${section.tone}`]} data-reveal>
+  <div class="section-caption"><span class="eyebrow">{section.eyebrow}</span><h2>{section.title}</h2></div>
+  <div class="section-copy">{section.paragraphs.map(p => <p>{p}</p>)}<slot /></div>
+</section>

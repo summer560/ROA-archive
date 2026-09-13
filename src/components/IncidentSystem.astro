@@ -1,0 +1,9 @@
+---
+import systems from '../data/systems.json';
+---
+<section id="incident" class="incident-section" data-reveal>
+  <div class="section-heading"><div><span class="eyebrow">05 / INCIDENT TYPE</span><h2>위험을 구분하는 다섯 단계</h2></div><span class="tiny-label">1 = HIGHEST RISK</span></div>
+  <div class="system-intro">{systems.incidentIntro.map(p=><p>{p}</p>)}</div>
+  <ol class="incident-list">{systems.types.map(t=><li class={`incident-row type-${t.type}`}><div class="incident-number"><span>TYPE</span><strong>{t.type.toString().padStart(2,'0')}</strong></div><div class="incident-label"><b>{t.label}</b><div class="risk-meter" aria-hidden="true">{Array.from({length:5},(_,i)=><i class:list={[i<6-t.type && 'filled']}></i>)}</div></div><p>{t.description}</p></li>)}</ol>
+  <p class="system-note">{systems.incidentNote}</p>
+</section>
