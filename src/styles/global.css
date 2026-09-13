@@ -2280,7 +2280,7 @@ a:focus-visible,button:focus-visible,summary:focus-visible,[tabindex]:focus-visi
   }
 }
 /* Archive gallery: preview assets stay light; original files load on demand. */
-.branch-systems { padding-block:65px; border-top:1px solid #555; margin-top:35px }
+.branch-systems { padding-block:65px; margin-top:35px }
 .branch-tabs { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:12px; margin-bottom:14px }
 .branch-tabs button { min-width:0; padding:24px 28px; text-align:left; display:flex; flex-direction:column; gap:12px; border:1px solid #777; background:#242421; color:var(--paper); transition:background .18s,color .18s,border-color .18s }
 .branch-tabs button span { font-size:14px; line-height:1.5 }
