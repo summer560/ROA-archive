@@ -24,6 +24,7 @@ const canonical = Astro.site ? new URL(Astro.url.pathname, Astro.site).href : un
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   </head>
   <body class:list={[`page-${category || 'home'}`]}>
+    <div class="reading-progress" aria-hidden="true"><span data-reading-progress></span></div>
     <a class="skip-link" href="#main">본문으로 건너뛰기</a>
     <header class="site-header">
       <a class="brand" href="/" aria-label="ROA 홈"><Logo /><span class="brand-description">WORLD<br />ARCHIVE</span></a>
@@ -44,6 +45,7 @@ const canonical = Astro.site ? new URL(Astro.url.pathname, Astro.site).href : un
       <div class="footer-bottom"><span>© SUMMER · ROA</span><span>WORLD / ABILITY / ALIEN / RANGER</span><span>한국어</span></div>
     </footer>
     <script>
+      import '../scripts/page-interactions';
       const reduced = window.matchMedia('(prefers-reduced-motion: reduce)');
       // Content stays visible if JavaScript fails or is disabled.
       if (!reduced.matches && 'IntersectionObserver' in window) {

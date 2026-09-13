@@ -1,4 +1,12 @@
 ---
 import Base from '../layouts/Base.astro';
+import Gallery from '../components/Gallery.astro';
 ---
-<Base title="ARCHIVE — 기록 보관소" category="archive"><section class="coming-page page-width"><span class="eyebrow">06 / ROA WORLD ARCHIVE</span><h1>ARCHIVE<span class="coming-label">COMING SOON</span></h1><div class="coming-divider" aria-hidden="true"></div><h2>컨텐츠 준비중</h2><a class="solid-button" href="/world/">세계관 둘러보기 <span aria-hidden="true">↗</span></a></section></Base>
+<Base title="ARCHIVE — 일러스트 갤러리" description="ROA 메인 일러스트를 감상하고 원본 이미지를 다운로드할 수 있는 갤러리입니다." category="archive">
+  <section class="archive-intro page-width">
+    <div class="category-meta"><a href="/">ROA / WORLD ARCHIVE</a><span>06 / 07</span></div>
+    <h1 class="category-title">ARCHIVE</h1>
+    <div class="archive-heading"><h2>일러스트 갤러리</h2><p>ROA 메인 일러스트를 감상하고<br />원본 이미지를 다운로드할 수 있습니다.</p></div>
+  </section>
+  <Gallery />
+</Base>

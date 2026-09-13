@@ -7,7 +7,7 @@ ROA의 공개 설정을 게임 공식 홈페이지의 편집 방식으로 탐색
 - 기준 원고: Google Drive **「ROA 설정집 정리」**. 공개 웹 문구: **「roa 웹사이트 구성요소」**. 출처와 반영 범위는 `docs/CONTENT-SOURCES.md`에 있습니다.
 - 사용자가 제공한 `ROA MAIN 2026.09.jpg`를 WebP로 변환한 일러스트가 홈에 들어 있습니다. 캐릭터 신원·소속을 임의로 붙이지 않았습니다.
 - 공식 로고 파일이 아직 없으므로 글자로 만든 ROA 워드마크를 사용합니다. 정식 로고는 설정 경로 한 곳으로 교체할 수 있습니다.
-- ARCHIVE와 CHARACTERS는 준비 중으로 표시됩니다. 가상의 캐릭터나 종족을 채워 넣지 않았습니다.
+- ARCHIVE에서는 공개된 메인 일러스트를 크게 보고 원본을 다운로드할 수 있습니다. CHARACTERS는 준비 중이며 가상의 캐릭터나 종족을 채워 넣지 않았습니다.
 - Google Drive 수정은 자동 동기화되지 않습니다. Work에게 원문을 확인하고 필요한 콘텐츠 파일을 갱신하도록 요청하면 됩니다.
 
 ## 프로젝트 구조
@@ -16,7 +16,10 @@ ROA의 공개 설정을 게임 공식 홈페이지의 편집 방식으로 탐색
 | --- | --- |
 | `src/pages/index.astro` | 일러스트 중심 홈 |
 | `src/pages/[category].astro` | WORLD / ABILITY / ALIEN / RANGER / ORGANIZATIONS |
-| `src/pages/archive.astro` | 기록 보관소 준비 중 화면 |
+| `src/pages/archive.astro` | 일러스트 갤러리 |
+| `src/components/Gallery.astro` | 갤러리 카드·확대 화면·다운로드 |
+| `src/data/gallery.ts` | 갤러리 이미지 목록·파일명·설명·크기 |
+| `src/scripts/page-interactions.ts` | 읽기 진행 표시·현재 목차 강조 |
 | `src/pages/characters/` | 캐릭터 목록과 공통 상세 템플릿 |
 | `src/pages/records/[slug].astro` | 새 종족·이상현상 등 설정 문서 공통 템플릿 |
 | `src/layouts/Base.astro` | 헤더, 메뉴, 푸터, SEO, 가벼운 스크롤 효과 |
@@ -98,6 +101,17 @@ Cloudflare의 **Workers & Pages → Create application → Pages → Import an e
 
 정식 ROA 로고가 준비되면 `public/images/icons/roa-logo.svg` 등에 넣고 `src/data/site.ts`의 `logo`를 그 공개 경로로 변경합니다. 투명 배경의 밝은 로고를 권장합니다.
 
+## 갤러리 이미지 추가
+
+현재 이미지 원본은 `public/images/gallery/roa-main-2026-09.jpg`, 목록용 WebP는 같은 폴더의 `roa-main-2026-09.webp`입니다. JPG는 사용자가 제공한 원본 파일 그대로이며, 다운로드 버튼은 이 파일을 저장합니다.
+
+1. `public/images/gallery/`에 새 원본 이미지와 가벼운 미리보기 이미지를 넣습니다. 예: `roa-main-2026-10.jpg`, `roa-main-2026-10.webp`.
+2. `src/data/gallery.ts`에 기존 항목을 참고해 `id`, `title`, `category`, `preview`, `original`, `filename`, `alt`, `width`, `height`, `format`을 추가합니다.
+3. 목록 순서는 데이터 순서를 따릅니다. 새 이미지를 맨 위에 추가하면 먼저 표시됩니다.
+4. 이미지가 두 개 이상이면 확대 화면의 이전·다음 버튼과 방향키 이동이 자동으로 활성화됩니다.
+
+홈 이미지와 갤러리 파일은 별도로 보관합니다. `hero-main.webp`를 교체해도 지난달 갤러리 이미지는 유지됩니다. 매달 Work에게 “메인 이미지를 바꾸고 이번 이미지도 갤러리에 추가해줘”라고 요청하면 됩니다. 다운로드 허용은 저작권·재사용 허가 문구를 임의로 추가한다는 의미가 아닙니다.
+
 ## 기존 세계관 내용 수정
 
 Work에게 “ROA-archive의 ALIEN 페이지에서 외인혼혈 설명을 이 원문으로 바꿔줘”처럼 요청하면 됩니다.
@@ -139,7 +153,7 @@ Work에게 “ROA-archive의 ALIEN 페이지에서 외인혼혈 설명을 이 �
 }
 ```
 
-`major: true`인 사건은 큰 연도로 강조되며 홈 축약 연표에도 표시됩니다. 현재 주요 시기는 1920s 포탈 등장, 1940s 외계 침공, 1950s 레인저·ROA 창설입니다. 공개 연표는 사용자 후속 요청에 따라 1500s—1600s부터 1960s 제도 정착까지 여덟 항목으로 구성합니다. 홈 WORLD 카드의 포탈 연도도 같은 연표 데이터를 사용합니다. 이후 연도는 새로 요청받았을 때만 추가합니다. 홈 연표의 열 수는 사건 수와 화면 폭에 맞춰 조정됩니다. 단순히 현재 연도가 달라졌다는 이유로 기존 사건 연도를 이동하지 않습니다.
+`major: true`인 사건은 홈 축약 연표에도 표시됩니다. 연도 숫자는 주요 사건 여부와 관계없이 같은 크기를 사용합니다. 데스크톱 48px, 모바일 32px이며 `--timeline-year-size`에서 조정합니다. 현재 주요 시기는 1920s 포탈 등장, 1940s 외계 침공, 1950s 레인저·ROA 창설입니다. 공개 연표는 사용자 후속 요청에 따라 1500s—1600s부터 1960s 제도 정착까지 여덟 항목으로 구성합니다. 홈 WORLD 카드의 포탈 연도도 같은 연표 데이터를 사용합니다. 이후 연도는 새로 요청받았을 때만 추가합니다. 홈 연표의 열 수는 사건 수와 화면 폭에 맞춰 조정됩니다. 단순히 현재 연도가 달라졌다는 이유로 기존 사건 연도를 이동하지 않습니다.
 
 ## 색상·글꼴·모션 수정
 
@@ -152,11 +166,12 @@ Work에게 “ROA-archive의 ALIEN 페이지에서 외인혼혈 설명을 이 �
 | `--red`, `--orange`, `--cyan`, `--gray` | 사건 타입·기관 구분 |
 | `--violet`, `--acid` | 외계 생명체·이상현상 보조색 |
 | `--gutter` | 화면 양쪽 여백 |
+| `--timeline-year-size` | 모든 연표의 공통 연도 글자 크기 |
 | `--display`, `--body`, `--mono` | 대형 영문·본문·보조 표기 글꼴 |
 
 영문 제목에는 로컬 호스팅하는 Anton을 사용합니다. 본문은 운영체제 한글 글꼴을 사용합니다. 글꼴 외부 API 호출은 없습니다. Anton은 SIL Open Font License이며 패키지의 라이선스를 따릅니다.
 
-스크롤 등장은 IntersectionObserver, 메뉴는 HTML details, 등급 선택은 소량의 JavaScript를 사용합니다. 지원 브라우저에서는 CSS View Transition으로 페이지를 전환합니다. 다른 브라우저에서는 일반 링크로 이동합니다. `prefers-reduced-motion`에서는 이동·등장·띠 애니메이션을 끕니다. JavaScript가 없어도 본문, 메뉴, 링크를 읽을 수 있습니다.
+스크롤 등장은 IntersectionObserver, 메뉴는 HTML details, 등급 선택은 소량의 JavaScript를 사용합니다. 페이지 상단의 읽기 진행 표시와 현재 목차 강조는 스크롤을 가로채지 않고 한 프레임씩 갱신합니다. 갤러리는 native dialog로 키보드 초점과 Esc 닫기를 지원하며, 실제 크기 보기와 여러 이미지 간 이동을 제공합니다. 지원 브라우저에서는 CSS View Transition으로 페이지를 전환합니다. 다른 브라우저에서는 일반 링크로 이동합니다. `prefers-reduced-motion`에서는 이동·등장·띠 애니메이션을 끕니다. JavaScript가 없어도 본문, 메뉴, 링크를 읽을 수 있습니다.
 
 ## 이후 Work에 수정 요청할 때
 
