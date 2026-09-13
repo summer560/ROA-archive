@@ -790,7 +790,7 @@ a:focus-visible,button:focus-visible,summary:focus-visible,[tabindex]:focus-visi
 }
 .coming-links a>span:last-child {
   display:flex;
-  justify-content:space-between;
+  justify-content:flex-end;
   font-size:14px;
   padding-top:8px
 }
