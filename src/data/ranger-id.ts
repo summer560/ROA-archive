@@ -2,9 +2,9 @@
 export const rangerId = {
   analystUrl: 'https://gemini.google.com/gem/1eBBJ7X0rKYtzYSEByCj29VjJosYU3STU?usp=sharing',
   affiliations: [
-    { value: '', label: '없음' },
-    { value: 'special-formation', label: '한국 ROA 지부 특수편성국' },
-    { value: 'sdc', label: '미국 ROA 지부 SDC' },
+    { value: '', label: '없음', cardLabel: '' },
+    { value: 'special-formation', label: '특수편성국 — 한국 ROA 지부', cardLabel: '특수편성국' },
+    { value: 'sdc', label: 'SDC — 미국 ROA 지부', cardLabel: 'SDC' },
   ],
   services: [
     { value: 'regular', label: '정규', cardLabel: 'REGULAR' },

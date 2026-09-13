@@ -85,3 +85,6 @@
   .id-actions button { padding-inline:16px }
 }
 @media(prefers-reduced-motion:reduce) { .id-page * { scroll-behavior:auto } }
+.id-branch-preview { display:flex; flex-direction:column; gap:4px; margin:4px 0 20px; padding:14px 16px; border-left:3px solid var(--yellow); background:#eeeee8; color:#111; overflow-wrap:anywhere }
+.id-branch-preview>span { font-size:12px; color:#44443c }
+.id-branch-preview output { font-size:16px; font-weight:700; line-height:1.6 }

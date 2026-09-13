@@ -8,6 +8,11 @@ export type CardState = {
 export type Rect = { x: number; y: number; w: number; h: number };
 const FONT = 'Arial, "Apple SD Gothic Neo", "Malgun Gothic", sans-serif';
 
+// The national branch is always the primary affiliation; the optional unit is subordinate.
+export function branchName(country: string) {
+  return `${country.trim() || '국가명'} ROA 지부`;
+}
+
 export function readableInk(hex: string): string {
   const c = [1, 3, 5].map(i => parseInt(hex.slice(i, i + 2), 16) / 255)
     .map(v => v <= .04045 ? v / 12.92 : ((v + .055) / 1.055) ** 2.4);
@@ -22,9 +27,9 @@ export function geometry(state: CardState) {
   const hasAffiliation = Boolean(state.affiliation);
   const width = portrait ? 756 : 1200;
   const height = portrait ? 1120 : 756;
-  const top = hasAffiliation ? 218 : 174;
+  const top = (portrait ? 235 : 218) + (hasAffiliation ? 36 : 0);
   const photo: Rect = portrait
-    ? { x: 52, y: top, w: 652, h: hasAffiliation ? 424 : 468 }
+    ? { x: 52, y: top, w: 652, h: 642 - top }
     : { x: state.layout === 'right' ? 770 : 52, y: top, w: 378, h: height - top - 52 };
   return { width, height, photo, portrait };
 }
@@ -94,8 +99,10 @@ export function renderCard(canvas: HTMLCanvasElement, state: CardState, photo: H
   fittedText(ctx, state.name || 'YOUR NAME', 52, g.portrait ? 82 : 58, titleWidth, 62, 700);
   ctx.font = `500 18px ${FONT}`; ctx.textAlign = 'right';
   ctx.fillText('RANGER ID', g.width - 52, g.portrait ? 39 : 62); ctx.textAlign = 'left';
+  const branchY = g.portrait ? 161 : 144;
+  fittedText(ctx, branchName(state.country), 52, branchY, g.width - 104, 27, 700);
   if (state.affiliation) {
-    fittedText(ctx, state.affiliation, 52, g.portrait ? 161 : 144, g.width - 104, 25, 500);
+    fittedText(ctx, state.affiliation, 52, branchY + 38, g.width - 104, 22, 500);
   }
 
   ctx.save(); rounded(ctx, g.photo, 16); ctx.clip();
@@ -133,6 +140,6 @@ export function renderCard(canvas: HTMLCanvasElement, state: CardState, photo: H
   ctx.beginPath(); ctx.moveTo(x, top + rowGap - 24); ctx.lineTo(x + w, top + rowGap - 24); ctx.stroke();
   ctx.globalAlpha = 1;
   ctx.restore();
-  canvas.setAttribute('aria-label', `${state.name || '이름 미입력'}의 등록증. 이능력 ${state.ability || '미입력'}, 국가 ${state.country || '미입력'}, Grade ${state.grade}, ${state.service}${state.affiliation ? ', ' + state.affiliation : ''}`);
+  canvas.setAttribute('aria-label', `${state.name || '이름 미입력'}의 등록증. 기본 소속 ${branchName(state.country)}${state.affiliation ? ', 상세 소속 ' + state.affiliation : ''}. 이능력 ${state.ability || '미입력'}, 국가 ${state.country || '미입력'}, Grade ${state.grade}, ${state.service}`);
   return g;
 }

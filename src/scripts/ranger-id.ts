@@ -1,4 +1,4 @@
-import { readableInk, geometry, photoPlacement, renderCard, type CardState } from './ranger-id-renderer';
+import { branchName, readableInk, geometry, photoPlacement, renderCard, type CardState } from './ranger-id-renderer';
 
 const root = document.querySelector<HTMLElement>('[data-id-builder]');
 if (root) {
@@ -27,7 +27,7 @@ if (root) {
       name: clean(input('name').value, 24), ability: clean(input('ability').value, 40),
       country: clean(input('country').value, 36), grade: select('grade').value,
       service: select('service').selectedOptions[0].dataset.cardLabel!,
-      affiliation: affiliation.value ? affiliation.selectedOptions[0].textContent!.trim() : '',
+      affiliation: affiliation.selectedOptions[0].dataset.cardLabel || '',
       orientation: radio('orientation'), layout: radio('layout'),
       background: input('background').value, foreground: input('foreground').value,
       accent: input('accent').value, monochrome: input('monochrome').checked,
@@ -46,6 +46,7 @@ if (root) {
     input('foreground').disabled = auto;
     if (auto) input('foreground').value = readableInk(input('background').value);
     const current = state();
+    root!.querySelector<HTMLOutputElement>('#id-branch')!.textContent = branchName(current.country);
     const portrait = current.orientation === 'portrait';
     root!.querySelector<HTMLElement>('#id-layout-choice')!.hidden = portrait;
     root!.querySelector<HTMLElement>('#id-portrait-note')!.hidden = !portrait;

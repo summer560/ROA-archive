@@ -26,14 +26,15 @@ import '../styles/ranger-id.css';
             <label class="id-field" for="id-name">이름<input id="id-name" name="name" type="text" placeholder="이름 입력" maxlength="24" required /></label>
             <div class="id-two">
               <label class="id-field" for="id-ability">이능력명<input id="id-ability" name="ability" type="text" placeholder="이능력명 입력" maxlength="40" required /></label>
-              <label class="id-field" for="id-country">소속 국가<input id="id-country" name="country" type="text" placeholder="국가 직접 입력" maxlength="36" required /></label>
+              <label class="id-field" for="id-country">소속 국가<input id="id-country" name="country" type="text" placeholder="국가 직접 입력" maxlength="36" aria-describedby="id-branch" required /></label>
             </div>
             <div class="id-two">
               <label class="id-field" for="id-grade">레인저 등급<select id="id-grade" name="grade">{systems.grades.map(g => <option value={String(g.grade)} selected={g.grade === 3}>Grade {g.grade}</option>)}</select></label>
               <label class="id-field" for="id-service">복무 유형<select id="id-service" name="service" aria-describedby="id-service-note">{rangerId.services.map(s => <option value={s.value} data-card-label={s.cardLabel}>{s.label}</option>)}</select></label>
             </div>
             <p class="id-help" id="id-service-note" hidden>1등급은 원칙적으로 정규 복무입니다.</p>
-            <label class="id-field" for="id-affiliation">상세 소속<select id="id-affiliation" name="affiliation">{rangerId.affiliations.map(a => <option value={a.value}>{a.label}</option>)}</select></label>
+            <div class="id-branch-preview"><span>기본 소속</span><output id="id-branch" for="id-country">국가명 ROA 지부</output></div>
+            <label class="id-field" for="id-affiliation">상세 소속 (선택)<select id="id-affiliation" name="affiliation">{rangerId.affiliations.map(a => <option value={a.value} data-card-label={a.cardLabel}>{a.label}</option>)}</select></label>
           </section>
           <section class="id-control-section">
             <h2>프로필 사진</h2>
