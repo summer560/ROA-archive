@@ -18,6 +18,10 @@ ROA의 공개 설정을 게임 공식 홈페이지의 편집 방식으로 탐색
 | `src/pages/[category].astro` | WORLD / ABILITY / ALIEN / RANGER / ORGANIZATIONS |
 | `src/pages/archive.astro` | 일러스트 갤러리 |
 | `src/pages/ranger-id.astro` | 레인저 등록증 제작 화면 |
+| `src/components/RegistrationGuide.astro` | 홈의 이능력자 등록 안내 배너·팝업 |
+| `src/data/registration.ts` | 홈 등록 안내 문구와 두 서비스 설명 |
+| `src/scripts/registration-guide.ts` | 등록 안내 팝업 열기·닫기·초점 복귀 |
+| `src/styles/registration-guide.css` | 등록 안내 배너·팝업의 PC·모바일 스타일 |
 | `src/data/ranger-id.ts` | 공개 상세 소속·복무 표기·색상·능력분석관 링크 |
 | `src/scripts/ranger-id.ts` | 입력·사진 조절·저장 동작 |
 | `src/scripts/ranger-id-renderer.ts` | 미리보기와 PNG의 공통 카드 렌더러 |
@@ -122,7 +126,9 @@ Cloudflare의 **Workers & Pages → Create application → Pages → Import an e
 
 ## 레인저 등록증 콘텐츠
 
-`/ranger-id/`에서 제작하며 홈과 ARCHIVE의 RANGER ID 카드로 연결됩니다. 이름·이능력명·국가는 직접 입력하고 등급·복무·상세 소속은 선택합니다. 상세 소속은 없음, 한국 ROA 지부 특수편성국, 미국 ROA 지부 SDC이며 `src/data/ranger-id.ts`에서 관리합니다. ‘없음’은 카드에서 소속 줄을 숨기고 사진 영역을 확장합니다. 등급 목록은 기존 `systems.json`을 사용하며, 1등급 선택 시 정규 복무가 적용됩니다.
+`/ranger-id/`에서 제작합니다. 홈의 세계관 핵심 카드 아래에는 ‘이능력자 등록하러 가기’ 안내 배너가 있으며, 누르면 능력분석관과 등록증 제작 링크가 담긴 팝업이 열립니다. ARCHIVE의 RANGER ID 배너는 제작 화면으로 바로 연결됩니다. 홈 안내 문구는 `src/data/registration.ts`에서 수정하며, Gem 주소는 `ranger-id.ts`의 기존 값을 공유합니다. 팝업은 닫기 버튼·Esc·바깥 클릭으로 닫히고 배너로 초점이 돌아갑니다. JavaScript가 없으면 홈 배너도 제작 화면으로 직접 연결됩니다.
+
+이름·이능력명·국가는 직접 입력하고 등급·복무·상세 소속은 선택합니다. 상세 소속은 없음, 한국 ROA 지부 특수편성국, 미국 ROA 지부 SDC이며 `src/data/ranger-id.ts`에서 관리합니다. ‘없음’은 카드에서 소속 줄을 숨기고 사진 영역을 확장합니다. 등급 목록은 기존 `systems.json`을 사용하며, 1등급 선택 시 정규 복무가 적용됩니다.
 
 같은 설정 파일에서 능력분석관의 Gemini Gem 링크와 기본 배경색 모음을 변경합니다. 능력이나 등급을 자동 생성·판정하는 기능은 없으며, Gem의 결과를 가져오는 자동 연동도 없습니다. 링크는 별도 탭으로 열립니다.
 

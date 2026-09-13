@@ -189,13 +189,6 @@ a:focus-visible,button:focus-visible,summary:focus-visible,[tabindex]:focus-visi
 .desktop-nav a[aria-current]:after {
   transform:scaleX(1)
 }
-.header-tag {
-  font:12px var(--mono);
-  white-space:nowrap;
-  margin-left:10px;
-  border:1px solid #555;
-  padding:6px 9px
-}
 .mobile-menu {
   display:none
 }
@@ -1493,7 +1486,7 @@ a:focus-visible,button:focus-visible,summary:focus-visible,[tabindex]:focus-visi
     --gutter:35px;
     --header:76px
   }
-  .desktop-nav,.header-tag {
+  .desktop-nav {
     display:none
   }
   .mobile-menu {

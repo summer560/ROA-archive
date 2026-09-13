@@ -3,7 +3,7 @@ import Base from '../layouts/Base.astro';
 import Logo from '../components/Logo.astro';
 import Timeline from '../components/Timeline.astro';
 import Organizations from '../components/Organizations.astro';
-import RangerIdLink from '../components/RangerIdLink.astro';
+import RegistrationGuide from '../components/RegistrationGuide.astro';
 import { site, navigation } from '../data/site';
 import pages from '../data/pages.json';
 import timeline from '../data/timeline.json';
@@ -30,8 +30,8 @@ const firstPortalYear = timeline.find(event => event.title === '차원 포탈 �
       {navigation.slice(0,4).map((n,i)=><a class:list={['explore-card',`explore-${n.slug}`]} href={`/${n.slug}/`} data-reveal><div class="card-top"><span>{n.number} / WORLD ARCHIVE</span><span class="card-arrow" aria-hidden="true">↗</span></div><div class="card-art" aria-hidden="true">{i===0?<span class="art-world">{firstPortalYear}<span>THE FIRST PORTAL</span></span>:i===1?<span class="art-ability">2<small>%</small></span>:i===2?<img class="art-alien-image" src="/images/alien/alien-slime.png" alt="" width="436" height="412" loading="lazy" decoding="async" />:<span class="art-ranger">01<span>02 / 03 / 04 / 05</span></span>}</div><div class="card-bottom"><h3>{n.en}</h3><span>{n.ko}</span></div></a>)}
     </div>
   </section>
+  <RegistrationGuide />
   <div class="history-home"><div class="page-width"><Timeline compact /></div></div>
   <section class="home-organizations page-width"><div class="section-heading" data-reveal><div><span class="eyebrow">THREE SIDES. ONE WORLD.</span><h2>같은 세계, 다른 신념.</h2></div><a class="text-link" href="/organizations/">조직 살펴보기 <span aria-hidden="true">↗</span></a></div><Organizations /></section>
-  <div class="page-width"><RangerIdLink /></div>
   <section class="coming-links page-width"><a href="/archive/"><span class="eyebrow">06 / GALLERY</span><strong>ARCHIVE</strong><span><b aria-hidden="true">↗</b></span></a><a href="/characters/"><span class="eyebrow">07 / COMING SOON</span><strong>CHARACTERS</strong><span><b aria-hidden="true">↗</b></span></a></section>
 </Base>

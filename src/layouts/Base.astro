@@ -31,7 +31,6 @@ const canonical = Astro.site ? new URL(Astro.url.pathname, Astro.site).href : un
       <nav class="desktop-nav" aria-label="주 메뉴">
         {navigation.map(item => <a href={`/${item.slug}/`} aria-current={category === item.slug ? 'page' : undefined}>{item.en}</a>)}
       </nav>
-      <span class="header-tag" aria-hidden="true">ROA / KR</span>
       <details class="mobile-menu">
         <summary aria-label="전체 메뉴">MENU <span class="menu-icon" aria-hidden="true"></span></summary>
         <nav aria-label="모바일 주 메뉴">{navigation.map(item => <a href={`/${item.slug}/`} aria-current={category === item.slug ? 'page' : undefined}><small>{item.number}</small><span>{item.en}<em>{item.ko}</em></span><b aria-hidden="true">↗</b></a>)}</nav>
