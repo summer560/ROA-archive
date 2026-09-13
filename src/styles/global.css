@@ -515,11 +515,13 @@ a:focus-visible,button:focus-visible,summary:focus-visible,[tabindex]:focus-visi
   background:var(--acid);
   color:var(--black)
 }
-.art-alien {
-  font-size:81px;
-  letter-spacing:-.04em;
-  text-align:center;
-  transform:rotate(5deg)
+.art-alien-image {
+  display:block;
+  width:100%;
+  max-width:280px;
+  height:auto;
+  max-height:230px;
+  object-fit:contain
 }
 .explore-ranger {
   background:#272725;
@@ -799,24 +801,10 @@ a:focus-visible,button:focus-visible,summary:focus-visible,[tabindex]:focus-visi
   color:#aaa
 }
 .site-footer {
-  border-top:1px solid #444;
-  padding:48px var(--gutter) 0;
+  padding:24px var(--gutter) 32px;
   display:flex;
   align-items:center;
-  gap:30px;
-  flex-wrap:wrap
-}
-.footer-brand .wordmark {
-  font-size:75px
-}
-.site-footer p {
-  font-size:14px;
-  line-height:1.7
-}
-.site-footer p>span {
-  font:12px var(--mono);
-  letter-spacing:.04em;
-  color:#aaa
+  justify-content:flex-end
 }
 .back-top {
   margin-left:auto;
@@ -832,21 +820,6 @@ a:focus-visible,button:focus-visible,summary:focus-visible,[tabindex]:focus-visi
   display:grid;
   place-items:center;
   font-size:23px
-}
-.footer-bottom {
-  width:100%;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:15px;
-  padding-block:30px 20px;
-  border-top:1px solid #333;
-  font:12px var(--mono);
-  color:#a6a6a0;
-  margin-top:12px
-}
-.footer-bottom>span:last-child {
-  font-family:var(--body)
 }
 /* Editorial category pages */
 .category-hero {
@@ -1842,9 +1815,6 @@ a:focus-visible,button:focus-visible,summary:focus-visible,[tabindex]:focus-visi
   .art-ability small {
     font-size:53px
   }
-  .art-alien {
-    font-size:58px
-  }
   .art-ranger {
     font-size:112px
   }
@@ -1934,30 +1904,12 @@ a:focus-visible,button:focus-visible,summary:focus-visible,[tabindex]:focus-visi
     margin-bottom:12px
   }
   .site-footer {
-    padding-top:35px;
-    gap:25px
-  }
-  .footer-brand .wordmark {
-    font-size:60px
-  }
-  .site-footer p {
-    font-size:12px
-  }
-  .site-footer p>span {
-    font-size:12px
+    padding-block:20px 28px
   }
   .back-top {
     width:100%;
     justify-content:space-between;
     margin-top:2px
-  }
-  .footer-bottom {
-    padding-block:20px;
-    margin-top:0;
-    font-size:12px
-  }
-  .footer-bottom>span:nth-child(2) {
-    display:none
   }
   .category-hero {
     padding-block:25px 36px
@@ -2271,9 +2223,6 @@ a:focus-visible,button:focus-visible,summary:focus-visible,[tabindex]:focus-visi
   }
   .art-world {
     font-size:45px
-  }
-  .art-alien {
-    font-size:51px
   }
   .card-top {
     letter-spacing:-.05em

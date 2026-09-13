@@ -39,10 +39,7 @@ const canonical = Astro.site ? new URL(Astro.url.pathname, Astro.site).href : un
     </header>
     <main id="main"><slot /></main>
     <footer class="site-footer">
-      <a class="footer-brand" href="/" aria-label="ROA 홈"><Logo /></a>
-      <p>ROA 공식 세계관 아카이브<br /><span>RANGER ORGANIZATION ALLIANCE</span></p>
       <a class="back-top" href="#main">BACK TO TOP <span aria-hidden="true">↑</span></a>
-      <div class="footer-bottom"><span>© SUMMER · ROA</span><span>WORLD / ABILITY / ALIEN / RANGER</span><span>한국어</span></div>
     </footer>
     <script>
       import '../scripts/page-interactions';

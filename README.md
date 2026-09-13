@@ -102,6 +102,8 @@ Cloudflare의 **Workers & Pages → Create application → Pages → Import an e
 
 정식 ROA 로고가 준비되면 `public/images/icons/roa-logo.svg` 등에 넣고 `src/data/site.ts`의 `logo`를 그 공개 경로로 변경합니다. 투명 배경의 밝은 로고를 권장합니다.
 
+홈 ALIEN 카드의 슬라임 이미지는 `public/images/alien/alien-slime.png`입니다. 첨부 원본을 그대로 사용하며 같은 파일을 교체하면 카드 이미지가 바뀝니다. 공통 푸터는 `BACK TO TOP`과 화살표만 표시합니다.
+
 ## 갤러리 이미지 추가
 
 현재 이미지 원본은 `public/images/gallery/roa-main-2026-09.jpg`, 목록용 WebP는 같은 폴더의 `roa-main-2026-09.webp`입니다. JPG는 사용자가 제공한 원본 파일 그대로이며, 다운로드 버튼은 이 파일을 저장합니다.
