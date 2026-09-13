@@ -517,11 +517,12 @@ a:focus-visible,button:focus-visible,summary:focus-visible,[tabindex]:focus-visi
 }
 .art-alien-image {
   display:block;
-  width:100%;
+  width:90%;
   max-width:280px;
   height:auto;
-  max-height:230px;
-  object-fit:contain
+  max-height:210px;
+  object-fit:contain;
+  transform:rotate(-9deg)
 }
 .explore-ranger {
   background:#272725;
