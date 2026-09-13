@@ -63,7 +63,14 @@ function field(ctx: CanvasRenderingContext2D, label: string, value: string, box:
     const chip = { x: box.x, y: box.y + 35, w: 87, h: 55 };
     ctx.fillStyle = accent; rounded(ctx, chip, 10); ctx.fill();
     ctx.fillStyle = readableInk(accent);
-    fittedText(ctx, value, box.x + 16, box.y + 44, 58, 32);
+    // Center the visible digits, excluding the font's uneven side bearings and leading.
+    ctx.save(); ctx.font = `600 32px ${FONT}`;
+    ctx.textAlign = 'left'; ctx.textBaseline = 'alphabetic';
+    const metrics = ctx.measureText(value);
+    ctx.fillText(value,
+      chip.x + chip.w / 2 + (metrics.actualBoundingBoxLeft - metrics.actualBoundingBoxRight) / 2,
+      chip.y + chip.h / 2 + (metrics.actualBoundingBoxAscent - metrics.actualBoundingBoxDescent) / 2);
+    ctx.restore();
   } else {
     ctx.fillStyle = ink;
     fittedText(ctx, value || '—', box.x, box.y + 44, box.w, 32);
@@ -125,7 +132,6 @@ export function renderCard(canvas: HTMLCanvasElement, state: CardState, photo: H
   ctx.strokeStyle = state.foreground; ctx.globalAlpha = .18; ctx.lineWidth = 1;
   ctx.beginPath(); ctx.moveTo(x, top + rowGap - 24); ctx.lineTo(x + w, top + rowGap - 24); ctx.stroke();
   ctx.globalAlpha = 1;
-  ctx.fillStyle = state.accent; ctx.fillRect(52, g.height - 32, 46, 5);
   ctx.restore();
   canvas.setAttribute('aria-label', `${state.name || '이름 미입력'}의 등록증. 이능력 ${state.ability || '미입력'}, 국가 ${state.country || '미입력'}, Grade ${state.grade}, ${state.service}${state.affiliation ? ', ' + state.affiliation : ''}`);
   return g;
