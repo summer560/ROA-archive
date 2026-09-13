@@ -6,6 +6,7 @@ export const registrationGuide = {
   subject: '이능력자',
   action: '등록하러 가기',
   summary: '이능력 분석 · 등록증 제작',
+  dialogLabel: 'GUIDE',
   dialogTitle: '이능력자 등록 안내',
   services: [
     {
