@@ -5,7 +5,7 @@ ROA의 공개 설정을 게임 공식 홈페이지의 편집 방식으로 탐색
 ## 먼저 확인할 것
 
 - 기준 원고: Google Drive **「ROA 설정집 정리」**. 공개 웹 문구: **「roa 웹사이트 구성요소」**. 출처와 반영 범위는 `docs/CONTENT-SOURCES.md`에 있습니다.
-- 사용자가 제공한 `ROA MAIN 2026.09.jpg`를 WebP로 변환한 일러스트가 홈에 들어 있습니다. 캐릭터 신원·소속을 임의로 붙이지 않았습니다.
+- 사용자가 제공한 `1000092694.jpg`의 한복 일러스트를 WebP로 변환해 홈에 표시합니다. 기존 메인 일러스트와 새 일러스트의 원본은 갤러리에서 다운로드할 수 있습니다. 캐릭터 신원·소속을 임의로 붙이지 않았습니다.
 - 공식 로고 파일이 아직 없으므로 글자로 만든 ROA 워드마크를 사용합니다. 정식 로고는 설정 경로 한 곳으로 교체할 수 있습니다.
 - ARCHIVE에서는 공개된 메인 일러스트를 크게 보고 원본을 다운로드할 수 있습니다. CHARACTERS는 준비 중이며 가상의 캐릭터나 종족을 채워 넣지 않았습니다.
 - Google Drive 수정은 자동 동기화되지 않습니다. Work에게 원문을 확인하고 필요한 콘텐츠 파일을 갱신하도록 요청하면 됩니다.
@@ -105,7 +105,7 @@ Cloudflare의 **Workers & Pages → Create application → Pages → Import an e
 - `hero.desktopPosition`, `hero.mobilePosition`은 이미지에서 보일 중심 위치입니다. 인물 얼굴이 잘리면 이 값을 조정합니다.
 - 세로형 이미지에서는 모바일 전용 파일을 지정하는 것이 좋습니다. 데스크톱은 약 16:9, 모바일은 약 4:5 또는 3:4 이미지를 권장합니다.
 - 다른 파일명을 쓰거나 AVIF로 바꾸려면 `src/data/site.ts`의 경로를 바꾸면 됩니다.
-- 이미지의 실제 가로·세로 크기는 같은 설정의 `hero.width`, `hero.height`에 기록합니다. 현재 이미지는 1216×832입니다.
+- 이미지의 실제 가로·세로 크기는 같은 설정의 `hero.width`, `hero.height`에 기록합니다. 현재 이미지는 1536×1051입니다.
 - `hero.alt`에 이미지 설명을 적습니다. 이미지의 인물을 임의의 세계관 캐릭터로 확정하지 않습니다.
 - 캐시가 예전 이미지를 붙들지 않도록 `/images/*`는 재검증하도록 설정되어 있습니다.
 
@@ -115,7 +115,7 @@ Cloudflare의 **Workers & Pages → Create application → Pages → Import an e
 
 ## 갤러리 이미지 추가
 
-현재 이미지 원본은 `public/images/gallery/roa-main-2026-09.jpg`, 목록용 WebP는 같은 폴더의 `roa-main-2026-09.webp`입니다. JPG는 사용자가 제공한 원본 파일 그대로이며, 다운로드 버튼은 이 파일을 저장합니다.
+현재 메인 이미지 원본은 `public/images/gallery/roa-main-2026-09-hanbok.jpg`, 목록용 WebP는 같은 폴더의 `roa-main-2026-09-hanbok.webp`입니다. 이전 메인 일러스트인 `roa-main-2026-09.jpg`와 미리보기 WebP도 유지합니다. JPG는 사용자가 제공한 원본 파일 그대로이며, 다운로드 버튼은 해당 파일을 저장합니다.
 
 1. `public/images/gallery/`에 새 원본 이미지와 가벼운 미리보기 이미지를 넣습니다. 예: `roa-main-2026-10.jpg`, `roa-main-2026-10.webp`.
 2. `src/data/gallery.ts`에 기존 항목을 참고해 `id`, `title`, `category`, `preview`, `original`, `filename`, `alt`, `width`, `height`, `format`을 추가합니다.
