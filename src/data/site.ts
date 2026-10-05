@@ -1,7 +1,7 @@
 // Monthly visual changes are made here OR by replacing hero-main.webp.
 export const site = {
   name: 'ROA',
-  title: 'ROA — 공식 세계관 아카이브',
+  title: 'ROA',
   description: '이능력자와 외계 생명체, 차원 포탈이 실재하는 세계. ROA 공식 세계관 아카이브입니다.',
   hero: {
     desktop: '/images/hero/hero-main.webp',
