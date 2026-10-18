@@ -26,7 +26,7 @@ ROA의 공개 설정을 게임 공식 홈페이지의 편집 방식으로 탐색
 | `src/scripts/ranger-id.ts` | 입력·사진 조절·저장 동작 |
 | `src/scripts/ranger-id-renderer.ts` | 미리보기와 PNG의 공통 카드 렌더러 |
 | `src/styles/ranger-id.css` | 등록증 편집 화면의 PC·모바일 스타일 |
-| `src/components/BranchSystems.astro` | SDC·특수편성국 탭과 기존 주소 연결 |
+| `src/components/BranchSystems.astro` | 미국 SDC·한국지부 산하 부서 탭과 기존 주소 연결 |
 | `src/components/Gallery.astro` | 갤러리 카드·확대 화면·다운로드 |
 | `src/data/gallery.ts` | 갤러리 이미지 목록·파일명·설명·크기 |
 | `src/scripts/page-interactions.ts` | 읽기 진행 표시·현재 목차 강조 |
@@ -142,7 +142,7 @@ Canvas 하나로 미리보기와 PNG를 그리므로 같은 구도·색상이 �
 
 Work에게 “ROA-archive의 ALIEN 페이지에서 외인혼혈 설명을 이 원문으로 바꿔줘”처럼 요청하면 됩니다.
 
-기존 내용은 `src/data/pages.json`에 있습니다. 각 섹션의 `id`는 링크 주소에 쓰이므로 내용만 수정할 때는 유지합니다. `title`은 제목, `eyebrow`는 작은 분류명, `paragraphs`는 문단 배열입니다. 설정은 JSON에 있고, 화면 배치는 컴포넌트와 CSS가 담당합니다. ORGANIZATIONS의 `sdc`, `special-formation`은 BranchSystems 컴포넌트의 탭으로 표시하며 기존 해시 주소를 유지합니다. 특수편성국의 신설·2026년 개설 설정은 폐기되었으므로 복원하지 않습니다.
+기존 내용은 `src/data/pages.json`에 있습니다. 각 섹션의 `id`는 링크 주소에 쓰이므로 내용만 수정할 때는 유지합니다. `title`은 제목, `eyebrow`는 작은 분류명, `paragraphs`는 문단 배열입니다. 설정은 JSON에 있고, 화면 배치는 컴포넌트와 CSS가 담당합니다. ORGANIZATIONS의 `sdc`, `special-formation`은 BranchSystems 컴포넌트의 탭으로 표시하며 기존 해시 주소를 유지합니다. 한국지부의 `special-formation` ID는 기존 링크 호환을 위한 값이며, 현재 본문은 7개 산하 부서를 소개합니다. `subtitle`은 내부 소제목이고 `departments` 배열의 `title`, `paragraphs`로 각 부서의 이름과 설명을 관리합니다. 탭에는 한국 ROA 지부만 표시하며 부서 목록은 세로로 배치합니다. 특수편성국의 신설·2026년 개설 설정은 폐기되었으므로 복원하지 않습니다.
 
 원고 우선순위는 사용자 명시 지시 → 해당 요청에서 지정한 최신 기준 원문 → 공개용 편집 원문입니다. 충돌이 생기면 추측으로 합치지 말고 해당 부분을 확인합니다. 비공개 캐릭터 비밀, OPEN, STORY ONLY 등을 공개 설정으로 옮기지 않습니다.
 

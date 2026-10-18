@@ -2,17 +2,32 @@
 import pages from '../data/pages.json';
 const branches = pages.organizations.sections.filter(section => ['sdc', 'special-formation'].includes(section.id));
 ---
-<section class="branch-systems" aria-label="ROA 지부 대응 체계">
+<section class="branch-systems" aria-label="ROA 지부 조직과 대응 체계">
   <div class="branch-tabs" role="tablist" aria-label="ROA 지부 선택" hidden>
     {branches.map((branch, index) => <button type="button" role="tab" id={`branch-tab-${branch.id}`} aria-controls={branch.id} aria-selected={index === 0 ? 'true' : 'false'} tabindex={index === 0 ? 0 : -1} data-branch-tab={branch.id}>
-      <span>{branch.title.split(' / ')[0]}</span><strong>{branch.title.split(' / ')[1]}</strong>
+      {'departments' in branch
+        ? <strong class="branch-tab-name">{branch.title}</strong>
+        : <><span>{branch.title.split(' / ')[0]}</span><strong>{branch.title.split(' / ')[1]}</strong></>}
     </button>)}
   </div>
   <div class="branch-panels">
-    {branches.map(branch => <section class="branch-panel" id={branch.id} role="tabpanel" aria-labelledby={`branch-tab-${branch.id}`} tabindex="0">
-      <h3 class="branch-fallback-title">{branch.title}</h3>
-      <div class="branch-overview"><p>{branch.paragraphs[0]}</p></div>
-      <div class="branch-copy">{branch.paragraphs.slice(1).map(paragraph => <p>{paragraph}</p>)}</div>
+    {branches.map(branch => <section class:list={['branch-panel', 'departments' in branch && 'branch-panel-directory']} id={branch.id} role="tabpanel" aria-labelledby={`branch-tab-${branch.id}`} tabindex="0">
+      {'departments' in branch ? <>
+        <header class="branch-directory-heading">
+          <h3>{branch.title}</h3>
+          <p>{branch.subtitle}</p>
+        </header>
+        <div class="branch-departments">
+          {branch.departments.map(department => <section class="branch-department" aria-labelledby={`department-${department.id}`}>
+            <h4 id={`department-${department.id}`}>{department.title}</h4>
+            <div class="branch-copy">{department.paragraphs.map(paragraph => <p>{paragraph}</p>)}</div>
+          </section>)}
+        </div>
+      </> : <>
+        <h3 class="branch-fallback-title">{branch.title}</h3>
+        <div class="branch-overview"><p>{branch.paragraphs[0]}</p></div>
+        <div class="branch-copy">{branch.paragraphs.slice(1).map(paragraph => <p>{paragraph}</p>)}</div>
+      </>}
     </section>)}
   </div>
 </section>

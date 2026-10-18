@@ -2216,6 +2216,8 @@ a:focus-visible,button:focus-visible,summary:focus-visible,[tabindex]:focus-visi
 .branch-tabs button { min-width:0; padding:24px 28px; text-align:left; display:flex; flex-direction:column; gap:12px; border:1px solid #777; background:#242421; color:var(--paper); transition:background .18s,color .18s,border-color .18s }
 .branch-tabs button span { font-size:14px; line-height:1.5 }
 .branch-tabs button strong { font-size:36px; line-height:1.2; letter-spacing:-.035em }
+.branch-tabs button:has(.branch-tab-name) { justify-content:center }
+.branch-tabs button .branch-tab-name { font-size:28px; line-height:1.4 }
 .branch-tabs button[aria-selected="true"] { background:var(--yellow); color:var(--black); border-color:var(--yellow) }
 .branch-tabs button:hover { border-color:var(--yellow) }
 .branch-panel { display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1.5fr); gap:35px 55px; padding:38px; background:var(--paper); color:var(--text-on-light); border-top:5px solid var(--yellow); scroll-margin-top:20px }
@@ -2226,6 +2228,15 @@ a:focus-visible,button:focus-visible,summary:focus-visible,[tabindex]:focus-visi
 .branch-overview p { font-size:22px; font-weight:700; line-height:1.8; color:var(--text-on-light) }
 .branch-copy p { font-size:17px; line-height:1.95; color:var(--secondary-on-light) }
 .branch-copy p+p { margin-top:20px }
+.branch-panel.branch-panel-directory { grid-template-columns:minmax(0,1fr); gap:0 }
+.branch-directory-heading { padding-bottom:30px; border-bottom:1px solid #bbb }
+.branch-directory-heading h3 { font-size:clamp(26px,3vw,36px); line-height:1.4 }
+.branch-directory-heading p { margin-top:10px; color:var(--secondary-on-light); font-size:14px }
+.branch-department { padding-block:30px }
+.branch-department+.branch-department { border-top:1px solid #ccc }
+.branch-department:last-child { padding-bottom:0 }
+.branch-department h4 { margin:0 0 12px; font-size:22px; line-height:1.5; letter-spacing:-.035em; color:var(--text-on-light) }
+.branch-department .branch-copy { max-width:52rem }
 .branch-panel:not([hidden]) { animation:branch-enter .18s ease-out }
 @keyframes branch-enter { from { opacity:.6; transform:translateY(8px) } to { opacity:1; transform:translateY(0) } }
 @media(max-width:900px) {
@@ -2238,10 +2249,14 @@ a:focus-visible,button:focus-visible,summary:focus-visible,[tabindex]:focus-visi
   .branch-tabs button { padding:17px 12px; gap:9px }
   .branch-tabs button span { font-size:12px }
   .branch-tabs button strong { font-size:24px }
+  .branch-tabs button .branch-tab-name { font-size:18px }
   .branch-panel { grid-template-columns:1fr; padding:24px 20px; gap:24px }
   .branch-overview { padding-bottom:24px; border-bottom:1px solid #bbb }
   .branch-overview p { font-size:19px }
   .branch-copy p { font-size:16px; line-height:1.9 }
+  .branch-directory-heading { padding-bottom:24px }
+  .branch-department { padding-block:24px }
+  .branch-department h4 { font-size:20px }
 }
 .reading-progress { position:fixed; inset:0 0 auto; height:3px; z-index:60; pointer-events:none }
 .reading-progress span { display:block; height:100%; background:var(--yellow); transform:scaleX(0); transform-origin:left }
