@@ -2,6 +2,18 @@
 // Add one entry and its preview/original files for each new illustration.
 export const gallery = [
   {
+    id: 'roa-main-2026-11-pepero',
+    title: 'ROA MAIN 2026.11 PEPERO',
+    category: '메인 일러스트',
+    preview: '/images/gallery/roa-main-2026-11-pepero.webp',
+    original: '/images/gallery/roa-main-2026-11-pepero.jpg',
+    filename: 'ROA-MAIN-2026-11-PEPERO.jpg',
+    alt: '알록달록한 배경에서 빼빼로를 든 검은 머리와 흰 머리의 두 인물이 등장하는 ROA 메인 일러스트',
+    width: 1536,
+    height: 1051,
+    format: 'JPG',
+  },
+  {
     id: 'roa-main-2026-09-hanbok',
     title: 'ROA MAIN 2026.09 HANBOK',
     category: '메인 일러스트',
