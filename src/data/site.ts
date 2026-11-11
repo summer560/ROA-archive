@@ -4,13 +4,13 @@ export const site = {
   title: 'ROA',
   description: '이능력자와 외계 생명체, 차원 포탈이 실재하는 세계. ROA 공식 세계관 아카이브입니다.',
   hero: {
-    desktop: '/images/hero/hero-main.webp',
-    mobile: '/images/hero/hero-main.webp',
+    desktop: '/images/hero/hero-main.webp?v=20261112',
+    mobile: '/images/hero/hero-main.webp?v=20261112',
     desktopPosition: 'center 35%',
-    mobilePosition: '35% 30%',
+    mobilePosition: '55% 30%',
     width: 1536,
     height: 1051,
-    alt: '붉은 전통 문양 배경에서 푸른 한복을 입고 송편을 건네는 인물의 ROA 메인 일러스트',
+    alt: '알록달록한 배경에서 빼빼로를 든 검은 머리와 흰 머리의 두 인물이 등장하는 ROA 메인 일러스트',
   },
   // Set a supplied official logo path later; null uses the editable ROA wordmark.
   logo: null as string | null,
