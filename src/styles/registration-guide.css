@@ -32,7 +32,7 @@
 .registration-option:focus-visible,.registration-close:focus-visible { outline-color:var(--black); outline-offset:3px }
 .registration-sr-only { position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip-path:inset(50%); white-space:nowrap; border:0 }
 @keyframes registration-open { from { opacity:0; transform:translateY(10px) } to { opacity:1; transform:translateY(0) } }
-@media(hover:hover) { .registration-banner:hover .registration-symbol svg { transform:rotate(0) } .registration-banner:hover .registration-arrow { background:var(--black); color:var(--yellow); transform:rotate(45deg) } .registration-option:hover { transform:translateY(-3px); border-color:var(--black) } }
+@media(hover:hover) { .registration-banner:hover .registration-symbol svg { transform:rotate(0) } .registration-banner:hover .registration-arrow { background:var(--black); color:var(--yellow); transform:rotate(45deg) } a.registration-option:hover { transform:translateY(-3px); border-color:var(--black) } }
 @media(max-width:900px) { .registration-banner { gap:24px; padding:30px } .registration-symbol { width:86px; padding-right:20px } .registration-symbol svg { width:64px } .registration-arrow { width:52px; height:52px; font-size:30px } }
 @media(max-width:600px) {
   .registration-section { padding-bottom:55px }

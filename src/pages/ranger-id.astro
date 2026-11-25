@@ -6,7 +6,7 @@ import '../styles/ranger-id.css';
 ---
 <Base title="RANGER ID — 등록증 만들기" description="사진과 이름, 이능력, 소속을 선택해 나만의 ROA 레인저 등록증을 만들고 이미지로 저장하세요." category="archive">
   <div class="id-page page-width" data-id-builder>
-    <header class="id-heading"><div><h1>RANGER ID</h1><p>등록증 만들기</p></div><a class="id-analyst" href={rangerId.analystUrl} target="_blank" rel="noopener noreferrer">능력분석관 <span aria-hidden="true">↗</span></a></header>
+    <header class="id-heading"><div><h1>RANGER ID</h1><p>등록증 만들기</p></div>{rangerId.analystUrl ? <a class="id-analyst" href={rangerId.analystUrl} target="_blank" rel="noopener noreferrer">능력분석관 <span aria-hidden="true">↗</span></a> : <span class="id-analyst" aria-disabled="true">능력분석관 <span>준비중</span></span>}</header>
     <noscript><p class="id-noscript">등록증을 만들려면 브라우저에서 JavaScript를 허용해주세요.</p></noscript>
     <div class="id-workspace">
       <section class="id-preview" aria-label="등록증 미리보기">

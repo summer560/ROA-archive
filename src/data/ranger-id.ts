@@ -1,6 +1,6 @@
 // Builder choices are presentation data, not a new registration or grading system.
 export const rangerId = {
-  analystUrl: 'https://gemini.google.com/gem/1eBBJ7X0rKYtzYSEByCj29VjJosYU3STU?usp=sharing',
+  analystUrl: null as string | null,
   affiliations: [
     { value: '', label: '없음', cardLabel: '' },
     { value: 'special-formation', label: '특수편성국 — ROA 한국 지부', cardLabel: '특수편성국' },

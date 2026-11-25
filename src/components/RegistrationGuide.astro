@@ -20,12 +20,15 @@ import '../styles/registration-guide.css';
       <button class="registration-close" type="button" data-registration-close aria-label="등록 안내 닫기" autofocus><span aria-hidden="true">×</span></button>
     </header>
     <div class="registration-options">
-      {guide.services.map((service, index) => <a class="registration-option" href={service.href} target={service.external ? '_blank' : undefined} rel={service.external ? 'noopener noreferrer' : undefined}>
+      {guide.services.map((service, index) => {
+        const ServiceTag = service.href ? 'a' : 'article';
+        return <ServiceTag class="registration-option" href={service.href || undefined} target={service.external ? '_blank' : undefined} rel={service.external ? 'noopener noreferrer' : undefined} aria-disabled={!service.href ? 'true' : undefined}>
         <span class="registration-option-top"><span aria-hidden="true">0{index + 1}</span><span>{service.subtitle}</span></span>
         <h3>{service.title}</h3>
         <p>{service.description}</p>
-        <span class="registration-option-action">{service.action}<span aria-hidden="true">{service.external ? '↗' : '→'}</span>{service.external && <span class="registration-sr-only"> (새 탭에서 열기)</span>}</span>
-      </a>)}
+        <span class="registration-option-action">{service.action}{service.href && <span aria-hidden="true">{service.external ? '↗' : '→'}</span>}{service.external && <span class="registration-sr-only"> (새 탭에서 열기)</span>}</span>
+      </ServiceTag>;
+      })}
     </div>
   </div>
 </dialog>

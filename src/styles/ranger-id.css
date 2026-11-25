@@ -4,7 +4,9 @@
 .id-heading h1 { font:clamp(44px,5.5vw,76px)/1.1 var(--display); letter-spacing:-.01em }
 .id-heading p { font-size:17px; margin-top:9px; color:#d7d7cf }
 .id-analyst { border:1px solid #777; border-radius:999px; display:flex; gap:22px; align-items:center; padding:12px 22px; font-size:14px; white-space:nowrap }
-.id-analyst:hover { background:var(--yellow); border-color:var(--yellow); color:#111 }
+a.id-analyst:hover { background:var(--yellow); border-color:var(--yellow); color:#111 }
+.id-analyst[aria-disabled] { border-style:dashed }
+.id-analyst[aria-disabled]>span { color:var(--yellow); font-weight:700 }
 .id-workspace { display:grid; grid-template-columns:minmax(0,1.35fr) minmax(340px,.9fr); align-items:start; gap:34px }
 .id-preview { position:sticky; top:28px; min-width:0 }
 .id-preview-top { display:flex; align-items:center; justify-content:space-between; font:12px var(--mono); letter-spacing:.08em; margin-bottom:18px }
